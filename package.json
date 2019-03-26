@@ -1,0 +1,19 @@
+{
+  "name": "tiny-markdown-server",
+  "version": "1.0.0",
+  "description": "Displays markdown files in the browser.",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^4.1.1",
+    "markdown-it": "^8.4.2",
+    "node-static": "^0.7.11"
+  },
+  "devDependencies": {
+    "electron-packager": "^13.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shinichiro MORI",
+  "license": "MIT"
+}
