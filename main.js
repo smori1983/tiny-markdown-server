@@ -1,11 +1,22 @@
 'use strict';
 
+const response200 = function(body) {
+  return {
+    responseCode: 200,
+    body: body,
+  };
+};
+
+const response404 = function(body) {
+  return {
+    responseCode: 404,
+    body: body,
+  };
+};
+
 const makeResponse = function(path) {
   if (path === '/') {
-    return {
-      responseCode: 200,
-      body: 'Index',
-    };
+    return response200('Index');
   }
 
   const fs = require('fs');
@@ -16,17 +27,11 @@ const makeResponse = function(path) {
 
     fs.statSync(file);
 
-    return {
-      responseCode: 200,
-      body: md.render(fs.readFileSync(file).toString()),
-    };
+    return response200(md.render(fs.readFileSync(file).toString()));
   } catch (e) {
     console.log(e);
 
-    return {
-      responseCode: 404,
-      body: 'Not Found.',
-    };
+    return response404('Not Found.');
   }
 };
 
