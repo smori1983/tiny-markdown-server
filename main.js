@@ -1,17 +1,18 @@
 'use strict';
 
-const response200 = function(body) {
+const responseOf = function(code, body) {
   return {
-    responseCode: 200,
+    responseCode: code,
     body: body,
   };
 };
 
+const response200 = function(body) {
+  return responseOf(200, body);
+};
+
 const response404 = function(body) {
-  return {
-    responseCode: 404,
-    body: body,
-  };
+  return responseOf(404, body);
 };
 
 const makeResponse = function(path) {
