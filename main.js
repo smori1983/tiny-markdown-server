@@ -16,12 +16,12 @@ const response404 = function(body) {
 };
 
 const makeResponse = function(path) {
-  if (path === '/') {
-    return response200('Index');
-  }
-
   const fs = require('fs');
   const md = require('markdown-it')();
+
+  if (path === '/') {
+    return response200(md.render(fs.readFileSync('./templates/index.md').toString()));
+  }
 
   try {
     let file = './files' + path;
@@ -32,7 +32,7 @@ const makeResponse = function(path) {
   } catch (e) {
     console.log(e);
 
-    return response404('Not Found.');
+    return response404(md.render(fs.readFileSync('./templates/404.md').toString()));
   }
 };
 
