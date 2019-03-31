@@ -4,6 +4,7 @@
   "description": "Displays markdown files in the browser.",
   "main": "main.js",
   "dependencies": {
+    "ejs": "^2.6.1",
     "electron": "^4.1.1",
     "markdown-it": "^8.4.2",
     "mime": "^2.4.0",
