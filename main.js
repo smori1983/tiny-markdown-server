@@ -1,9 +1,9 @@
 'use strict';
 
-const ejs = require('ejs');
 const mime = require('mime');
 
 const indexUtil = require('./lib/indexUtil');
+const ejsUtil = require('./lib/ejsUtil');
 
 const responseOf = function(code, mime, body) {
   return {
@@ -26,7 +26,7 @@ const makeResponse = function(path) {
   const md = require('markdown-it')();
 
   if (path === '/') {
-    return response200(ejs.render(fs.readFileSync(__dirname + '/templates/index.ejs').toString(), {
+    return response200(ejsUtil.render('index.ejs', {
       files: indexUtil.scanMarkdownFiles('./files'),
     }));
   }
@@ -43,7 +43,7 @@ const makeResponse = function(path) {
     fs.statSync(file);
 
     if (/\.md$/.test(file)) {
-      return response200(ejs.render(fs.readFileSync(__dirname + '/templates/markdown.ejs').toString(), {
+      return response200(ejsUtil.render('markdown.ejs', {
         content: md.render(fs.readFileSync(file).toString()),
       }));
     } else {
@@ -52,7 +52,7 @@ const makeResponse = function(path) {
   } catch (e) {
     console.log(e);
 
-    return response404(ejs.render(fs.readFileSync(__dirname + '/templates/404.ejs').toString()));
+    return response404(ejsUtil.render('404.ejs'));
   }
 };
 
