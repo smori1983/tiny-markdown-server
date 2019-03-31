@@ -27,8 +27,14 @@ const makeResponse = function(path) {
     return response200(ejs.render(fs.readFileSync(__dirname + '/templates/index.ejs').toString()));
   }
 
+  let file;
+
   try {
-    let file = './files' + path;
+    if (/^\/files_builtin\//.test(path)) {
+      file = __dirname + path;
+    } else {
+      file = './files' + path;
+    }
 
     fs.statSync(file);
 
