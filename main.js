@@ -1,18 +1,21 @@
 'use strict';
 
-const responseOf = function(code, body) {
+const mime = require('mime');
+
+const responseOf = function(code, mime, body) {
   return {
     responseCode: code,
+    mimeType: mime,
     body: body,
   };
 };
 
-const response200 = function(body) {
-  return responseOf(200, body);
+const response200 = function(body, mimeType) {
+  return responseOf(200, mimeType || mime.getType('html'), body);
 };
 
 const response404 = function(body) {
-  return responseOf(404, body);
+  return responseOf(404, mime.getType('html'), body);
 };
 
 const makeResponse = function(path) {
@@ -28,7 +31,11 @@ const makeResponse = function(path) {
 
     fs.statSync(file);
 
-    return response200(md.render(fs.readFileSync(file).toString()));
+    if (/\.md$/.test(file)) {
+      return response200(md.render(fs.readFileSync(file).toString()));
+    } else {
+      return response200(fs.readFileSync(file), mime.getType(file));
+    }
   } catch (e) {
     console.log(e);
 
@@ -39,7 +46,7 @@ const makeResponse = function(path) {
 const server = require('http').createServer(function(request, response) {
   let result = makeResponse(request.url);
 
-  response.writeHead(result.responseCode, { 'Content-Type': 'text/html' });
+  response.writeHead(result.responseCode, { 'Content-Type': result.mimeType });
   response.write(result.body);
   response.end();
 });
