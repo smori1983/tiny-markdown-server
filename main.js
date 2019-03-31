@@ -1,8 +1,9 @@
 'use strict';
 
-const fs = require('fs');
 const ejs = require('ejs');
 const mime = require('mime');
+
+const indexUtil = require('./lib/indexUtil');
 
 const responseOf = function(code, mime, body) {
   return {
@@ -20,42 +21,13 @@ const response404 = function(body) {
   return responseOf(404, mime.getType('html'), body);
 };
 
-/**
- * @param {string} directory 
- * @param {string[]} list 
- * @param {string[]} dirNames 
- */
-const scanMarkdownFiles = function(directory, list, dirNames) {
-  const notEmpty = function(value) {
-    return value.length > 0;
-  };
-
-  let dir = [directory, dirNames.join('/')].filter(notEmpty).join('/');
-
-  fs.readdirSync(dir, { withFileTypes: true }).forEach(function(dirent) {
-    if (dirent.isFile() && /\.md$/.test(dirent.name)) {
-      let path = [dirNames.join('/'), dirent.name].filter(notEmpty).join('/');
-
-      list.push(path);
-    }
-
-    if (dirent.isDirectory()) {
-      dirNames.push(dirent.name);
-      list = scanMarkdownFiles(directory, list, dirNames);
-      dirNames.pop();
-    }
-  });
-
-  return list;
-};
-
 const makeResponse = function(path) {
   const fs = require('fs');
   const md = require('markdown-it')();
 
   if (path === '/') {
     return response200(ejs.render(fs.readFileSync(__dirname + '/templates/index.ejs').toString(), {
-      files: scanMarkdownFiles('./files', [], []),
+      files: indexUtil.scanMarkdownFiles('./files'),
     }));
   }
 
