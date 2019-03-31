@@ -1,5 +1,6 @@
 'use strict';
 
+const ejs = require('ejs');
 const mime = require('mime');
 
 const responseOf = function(code, mime, body) {
@@ -23,7 +24,7 @@ const makeResponse = function(path) {
   const md = require('markdown-it')();
 
   if (path === '/') {
-    return response200(md.render(fs.readFileSync('./templates/index.md').toString()));
+    return response200(ejs.render(fs.readFileSync(__dirname + '/templates/index.ejs').toString()));
   }
 
   try {
@@ -32,14 +33,16 @@ const makeResponse = function(path) {
     fs.statSync(file);
 
     if (/\.md$/.test(file)) {
-      return response200(md.render(fs.readFileSync(file).toString()));
+      return response200(ejs.render(fs.readFileSync(__dirname + '/templates/markdown.ejs').toString(), {
+        content: md.render(fs.readFileSync(file).toString()),
+      }));
     } else {
       return response200(fs.readFileSync(file), mime.getType(file));
     }
   } catch (e) {
     console.log(e);
 
-    return response404(md.render(fs.readFileSync('./templates/404.md').toString()));
+    return response404(ejs.render(fs.readFileSync(__dirname + '/templates/404.ejs').toString()));
   }
 };
 
