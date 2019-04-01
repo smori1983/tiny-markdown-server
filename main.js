@@ -1,7 +1,9 @@
 'use strict';
 
-const mds = require('./lib/markdownServer')(__dirname + '/files');
+const dir = __dirname + '/files';
 const port = 3000;
+
+const mds = require('./lib/markdownServer')(dir);
 
 require('http').createServer(function(request, response) {
   mds.serve(request, response);
