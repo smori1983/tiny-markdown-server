@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('stop').addEventListener('click', function () {
     ipcRenderer.send('server-stop');
   });
-});
 
-ipcRenderer.on('server-started', function() {
-  document.getElementById('server-status').innerHTML = 'server started.';
-});
+  ipcRenderer.on('server-started', function() {
+    document.getElementById('server-status').innerHTML = 'server started.';
+  });
 
-ipcRenderer.on('server-stopped', function() {
-  document.getElementById('server-status').innerHTML = 'server stopped.';
+  ipcRenderer.on('server-stopped', function() {
+    document.getElementById('server-status').innerHTML = 'server stopped.';
+  });
 });
