@@ -1,10 +1,24 @@
 'use strict';
 
 const {ipcRenderer} = require('electron');
+const {dialog} = require('electron').remote;
 
 document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('directory_select').addEventListener('click', function() {
+    dialog.showOpenDialog({
+      properties: ['openDirectory'],
+    }, function(path) {
+      document.getElementById('directory').value = path[0];
+    });
+  });
+
   document.getElementById('start').addEventListener('click', function () {
+    let directory = document.getElementById('directory').value;
     let port = document.getElementById('port').value;
+
+    if (directory.length === 0) {
+      return;
+    }
 
     if (/^\d+$/.test(port) === false) {
       return;
@@ -14,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     ipcRenderer.send('server-start', {
       port: port,
+      directory: directory,
     });
   });
 

@@ -27,13 +27,11 @@ app.on('ready', function() {
   });
 });
 
-const dir = __dirname + '/files';
-
-const mds = require('./lib/markdownServer')(dir);
-
 let server;
 
 ipcMain.on('server-start', function(event, args) {
+  const mds = require('./lib/markdownServer')(args.directory);
+
   if (server) {
     server.close();
   }
