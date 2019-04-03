@@ -38,7 +38,9 @@ ipcMain.on('server-start', function(event, args) {
 
   server = require('http').createServer(function(request, response) {
     mds.serve(request, response);
-  }).listen(args.port);
+  });
+  server.keepAliveTimeout = 10;
+  server.listen(args.port);
 
   event.sender.send('server-started');
 });
