@@ -3,14 +3,16 @@
 <%- include('common/head') %>
 </head>
 <body>
-    <div class="main">
+<%- include('common/menu') %>
+<div class="main">
+    <div class="markdown-body">
         <h1>Files</h1>
-
         <ul>
             <% files.forEach(function(file) { %>
             <li><a href="<%= file %>"><%= file %></a></li>
             <% }); %>
         </ul>
     </div>
+</div>
 </body>
 </html>
