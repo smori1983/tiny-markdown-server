@@ -8,8 +8,7 @@
     "electron": "^4.1.1",
     "github-markdown-css": "^3.0.1",
     "markdown-it": "^8.4.2",
-    "mime": "^2.4.0",
-    "node-static": "^0.7.11"
+    "mime": "^2.4.0"
   },
   "devDependencies": {
     "electron-packager": "^13.1.1"
