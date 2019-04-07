@@ -10,7 +10,7 @@ let mainWindow;
 
 app.on('window-all-closed', function() {
   app.quit();
-})
+});
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({
@@ -19,7 +19,7 @@ app.on('ready', function() {
     resizable: true,
     alwaysOnTop: false,
     movable: true,
-  })
+  });
   mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 
   mainWindow.on('closed', function() {
