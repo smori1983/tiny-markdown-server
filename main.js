@@ -1,5 +1,8 @@
 'use strict';
 
+const fs = require('fs');
+const ejsElectron = require('ejs-electron');
+
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
@@ -13,6 +16,10 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
+  const packageJson = JSON.parse(fs.readFileSync(__dirname + '/package.json', 'utf8'));
+
+  ejsElectron.data('version', packageJson.version);
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -20,7 +27,7 @@ app.on('ready', function() {
     alwaysOnTop: false,
     movable: true,
   });
-  mainWindow.loadURL('file://' + __dirname + '/app/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/app/index.ejs');
 
   mainWindow.on('closed', function() {
     mainWindow = null;
