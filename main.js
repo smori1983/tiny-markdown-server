@@ -23,9 +23,6 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    resizable: true,
-    alwaysOnTop: false,
-    movable: true,
   });
   mainWindow.loadURL('file://' + __dirname + '/app/index.ejs');
 
