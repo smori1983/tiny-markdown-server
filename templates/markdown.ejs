@@ -1,0 +1,17 @@
+<html>
+<head>
+<%- include('common/head') %>
+<link rel="stylesheet" href="/-/highlight.js/styles/github.css">
+<title><%= title %></title>
+</head>
+<body>
+<%- include('common/menu') %>
+<div class="main">
+    <div class="markdown-body">
+        <%- content %>
+    </div>
+</div>
+<script src="/-/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
