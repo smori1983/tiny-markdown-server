@@ -22,7 +22,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "electron main.js"
+    "app": "electron main.js",
+    "build": "npm run build:mac && npm run build:win",
+    "build:mac": "node build_scripts/build-mac.js",
+    "build:win": "node build_scripts/build-win.js"
   },
   "author": "Shinichiro MORI",
   "license": "MIT"

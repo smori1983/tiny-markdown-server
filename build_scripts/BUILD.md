@@ -16,6 +16,12 @@ npm install --save-dev electron-builder
 node build_scripts/build-mac.js
 ```
 
+or 
+
+```
+npm run build:mac
+```
+
 
 ## For Windows
 
@@ -30,4 +36,10 @@ brew install mono
 
 ```
 node build_scripts/build-win.js
+```
+
+or 
+
+```
+npm run build:win
 ```
