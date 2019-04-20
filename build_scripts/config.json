@@ -1,0 +1,23 @@
+{
+  "productName": "TinyMarkdownServer",
+  "directories": {
+    "output": "_dist/${version}"
+  },
+  "files": [
+    "!.idea/**/*",
+    "!_dist/**/*",
+    "!build_scripts/**/*"
+  ],
+  "win": {
+    "target": {
+      "target": "portable",
+      "arch": "x64"
+    }
+  },
+  "mac": {
+    "target": {
+      "target": "dmg",
+      "arch": "x64"
+    }
+  }
+}
