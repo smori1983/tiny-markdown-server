@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
+    if (!(80 <= port && port <= 65535)) {
+      return;
+    }
+
     document.getElementById('server-status').innerHTML = '';
 
     ipcRenderer.send('server-start', {
