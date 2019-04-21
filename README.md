@@ -3,6 +3,15 @@
 Run server which serves parsed markdown files.
 
 
+## Build for Electron
+
+```
+npm run build
+npm run build:mac
+npm run build:win
+```
+
+
 ## CLI
 
 ```
