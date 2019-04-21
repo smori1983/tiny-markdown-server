@@ -3,6 +3,8 @@
 const {ipcRenderer} = require('electron');
 const {dialog} = require('electron').remote;
 
+const fs = require('fs');
+
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('directory_select').addEventListener('click', function() {
     dialog.showOpenDialog({
@@ -17,6 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let port = document.getElementById('port').value;
 
     if (directory.length === 0) {
+      return;
+    }
+
+    try {
+      if (!fs.statSync(directory).isDirectory()) {
+        return;
+      }
+    } catch (e) {
       return;
     }
 
