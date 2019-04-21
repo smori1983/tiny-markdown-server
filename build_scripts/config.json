@@ -6,7 +6,8 @@
   "files": [
     "!.idea/**/*",
     "!_dist/**/*",
-    "!build_scripts/**/*"
+    "!build_scripts/**/*",
+    "!files_builtin/highlight.zip"
   ],
   "win": {
     "target": {
