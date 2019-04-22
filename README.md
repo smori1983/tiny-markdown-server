@@ -2,6 +2,8 @@
 
 Run server which serves parsed markdown files.
 
+![mac](https://raw.githubusercontent.com/smori1983/tiny-markdown-server/images/app_mac.png)
+
 
 ## Build for Electron
 
