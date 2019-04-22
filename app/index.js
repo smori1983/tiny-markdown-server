@@ -17,34 +17,53 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('start').addEventListener('click', function () {
     let directory = document.getElementById('directory').value;
     let port = document.getElementById('port').value;
+    let errors = [];
 
-    if (directory.length === 0) {
-      return;
+    if (checkDirectory(directory) === false) {
+      errors.push('directory');
     }
 
-    try {
-      if (!fs.statSync(directory).isDirectory()) {
-        return;
-      }
-    } catch (e) {
-      return;
-    }
-
-    if (/^\d+$/.test(port) === false) {
-      return;
-    }
-
-    if (!(80 <= port && port <= 65535)) {
-      return;
+    if (checkPort(port) === false) {
+      errors.push('port');
     }
 
     document.getElementById('server-status').innerHTML = '';
 
-    ipcRenderer.send('server-start', {
-      port: port,
-      directory: directory,
-    });
+    if (errors.length > 0) {
+      errors.forEach(function(id) {
+        document.getElementById(id).classList.add('is-invalid');
+      });
+    } else {
+      document.querySelectorAll('.user-input').forEach(function (element) {
+        element.classList.remove('is-invalid');
+      });
+
+      ipcRenderer.send('server-start', {
+        port: port,
+        directory: directory,
+      });
+    }
   });
+
+  /**
+   * @param {string} value
+   * @returns {boolean}
+   */
+  const checkDirectory = function(value) {
+    try {
+      return fs.statSync(value).isDirectory();
+    } catch (e) {
+      return false;
+    }
+  };
+
+  /**
+   * @param {string} value
+   * @returns {boolean}
+   */
+  const checkPort = function(value) {
+    return (/^\d+$/.test(value)) && (80 <= value && value <= 65535);
+  };
 
   document.getElementById('stop').addEventListener('click', function () {
     ipcRenderer.send('server-stop');
