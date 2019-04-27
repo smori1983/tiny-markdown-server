@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (result.isValid) {
       ipcRenderer.send('server-start', {
-        port: port,
         directory: directory,
+        port: port,
       });
     } else {
       result.errors.forEach(function(id) {
