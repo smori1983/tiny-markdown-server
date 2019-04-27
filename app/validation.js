@@ -56,7 +56,9 @@ const execute = function(data) {
   let errors = [];
 
   result.errors.forEach(function (error) {
-    errors.push(error.property.replace(/^instance\./, ''));
+    // propertyPath may be 'instance'.
+    // property will be 'instance.directory' etc.
+    errors.push(error.property.slice(result.propertyPath.length + 1));
   });
 
   return {
