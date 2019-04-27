@@ -55,8 +55,6 @@ const execute = function(data) {
 
   let errors = [];
 
-  console.log(result);
-
   result.errors.forEach(function (error) {
     errors.push(error.property.replace(/^instance\./, ''));
   });
