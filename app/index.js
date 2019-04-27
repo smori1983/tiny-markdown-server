@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('server-status').innerHTML = '';
 
-    if (result.isValid) {
-      document.querySelectorAll('.user-input').forEach(function (element) {
-        element.classList.remove('is-invalid');
-      });
+    document.querySelectorAll('.user-input').forEach(function (element) {
+      element.classList.remove('is-invalid');
+    });
 
+    if (result.isValid) {
       ipcRenderer.send('server-start', {
         port: port,
         directory: directory,
