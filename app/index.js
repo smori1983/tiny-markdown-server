@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('start').addEventListener('click', function () {
-    let directory = document.getElementById('directory').value;
-    let port = document.getElementById('port').value;
+    const directory = document.getElementById('directory').value;
+    const port = document.getElementById('port').value;
 
     const result = validation.execute({
       directory: directory,
