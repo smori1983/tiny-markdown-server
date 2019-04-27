@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   const checkDirectory = function(value) {
     try {
-      return fs.statSync(value).isDirectory();
+      return value.length > 0 && fs.statSync(value).isDirectory();
     } catch (e) {
       return false;
     }
