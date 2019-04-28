@@ -50,9 +50,8 @@ ipcMain.on('server-start', function(event, args) {
 });
 
 ipcMain.on('server-stop', function(event) {
-  if (server) {
+  if (server && server.listening) {
     server.close();
+    event.sender.send('server-stopped');
   }
-
-  event.sender.send('server-stopped');
 });
