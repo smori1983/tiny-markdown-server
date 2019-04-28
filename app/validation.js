@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const Validator = require('jsonschema').Validator;
+const builder = require('./validationBuilder');
 
 /**
  * @param {string} input
@@ -23,9 +23,12 @@ const isPort = function (input) {
   return (/^\d+$/.test(input)) && (80 <= input && input <= 65535);
 };
 
-const schema = {
-  'type': 'object',
-  'properties': {
+/**
+ * @param {object} data
+ * @returns {validationResult}
+ */
+const execute = function(data) {
+  const validation = builder.build({
     'directory': {
       'type': 'string',
       'required': true,
@@ -36,39 +39,12 @@ const schema = {
       'required': true,
       'format': 'isPort',
     },
-  },
-};
-
-/**
- * @typedef {object} validationResult
- * @property {boolean} isValid
- * @property {string[]} errors List of invalid properties
- */
-
-/**
- * @param {object} data
- * @returns {validationResult}
- */
-const execute = function(data) {
-  const validator = new Validator();
-
-  validator.customFormats.isDir = isDir;
-  validator.customFormats.isPort = isPort;
-
-  const result = validator.validate(data, schema);
-
-  let errors = [];
-
-  result.errors.forEach(function (error) {
-    // propertyPath may be 'instance'.
-    // property will be 'instance.directory' etc.
-    errors.push(error.property.slice(result.propertyPath.length + 1));
   });
 
-  return {
-    isValid: result.valid,
-    errors: errors,
-  };
+  validation.addFormat('isDir', isDir);
+  validation.addFormat('isPort', isPort);
+
+  return validation.execute(data);
 };
 
 module.exports.execute = execute;
