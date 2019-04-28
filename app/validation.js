@@ -42,7 +42,7 @@ const schema = {
 /**
  * @typedef {object} validationResult
  * @property {boolean} isValid
- * @property {string[]} errors
+ * @property {string[]} errors List of invalid properties
  */
 
 /**
