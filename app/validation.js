@@ -2,13 +2,12 @@
 
 const fs = require('fs');
 const Validator = require('jsonschema').Validator;
-const validate = require('jsonschema').validate;
 
 /**
  * @param {string} input
  * @returns {boolean}
  */
-Validator.prototype.customFormats.isDir = function (input) {
+const isDir = function (input) {
   try {
     return input.length > 0 && fs.statSync(input).isDirectory();
   } catch (e) {
@@ -20,7 +19,7 @@ Validator.prototype.customFormats.isDir = function (input) {
  * @param {string} input
  * @returns {boolean}
  */
-Validator.prototype.customFormats.isPort = function (input) {
+const isPort = function (input) {
   return (/^\d+$/.test(input)) && (80 <= input && input <= 65535);
 };
 
@@ -51,7 +50,12 @@ const schema = {
  * @returns {validationResult}
  */
 const execute = function(data) {
-  const result = validate(data, schema);
+  const validator = new Validator();
+
+  validator.customFormats.isDir = isDir;
+  validator.customFormats.isPort = isPort;
+
+  const result = validator.validate(data, schema);
 
   let errors = [];
 
