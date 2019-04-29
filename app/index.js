@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       port: port,
     });
 
-    document.getElementById('server-status').innerHTML = '';
+    showStatusMessage('');
 
     document.querySelectorAll('.user-input').forEach(function (element) {
       element.classList.remove('is-invalid');
@@ -46,10 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   ipcRenderer.on('server-started', function() {
-    document.getElementById('server-status').innerHTML = 'server started.';
+    showStatusMessage('server started.');
   });
 
   ipcRenderer.on('server-stopped', function() {
-    document.getElementById('server-status').innerHTML = 'server stopped.';
+    showStatusMessage('server stopped.');
   });
 });
+
+/**
+ * @param {string} message
+ */
+const showStatusMessage = function(message) {
+  document.getElementById('server-status').innerHTML = message;
+};
