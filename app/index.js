@@ -3,6 +3,8 @@
 const {ipcRenderer} = require('electron');
 const {dialog} = require('electron').remote;
 
+const validation = require('./validation');
+
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('directory_select').addEventListener('click', function() {
     dialog.showOpenDialog({
@@ -13,23 +15,30 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('start').addEventListener('click', function () {
-    let directory = document.getElementById('directory').value;
-    let port = document.getElementById('port').value;
+    const directory = document.getElementById('directory').value;
+    const port = document.getElementById('port').value;
 
-    if (directory.length === 0) {
-      return;
-    }
-
-    if (/^\d+$/.test(port) === false) {
-      return;
-    }
+    const result = validation.execute({
+      directory: directory,
+      port: port,
+    });
 
     document.getElementById('server-status').innerHTML = '';
 
-    ipcRenderer.send('server-start', {
-      port: port,
-      directory: directory,
+    document.querySelectorAll('.user-input').forEach(function (element) {
+      element.classList.remove('is-invalid');
     });
+
+    if (result.isValid) {
+      ipcRenderer.send('server-start', {
+        directory: directory,
+        port: port,
+      });
+    } else {
+      result.errors.forEach(function(id) {
+        document.getElementById(id).classList.add('is-invalid');
+      });
+    }
   });
 
   document.getElementById('stop').addEventListener('click', function () {
