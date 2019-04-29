@@ -10,6 +10,7 @@ const ipcMain = electron.ipcMain;
 const app = electron.app;
 
 let mainWindow;
+let server;
 
 app.on('window-all-closed', function() {
   app.quit();
@@ -30,8 +31,6 @@ app.on('ready', function() {
     mainWindow = null;
   });
 });
-
-let server;
 
 ipcMain.on('server-start', function(event, args) {
   const mds = require('./lib/markdownServer')(args.directory);
