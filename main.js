@@ -1,6 +1,5 @@
 'use strict';
 
-const fs = require('fs');
 const ejsElectron = require('ejs-electron');
 
 const electron = require('electron');
@@ -17,7 +16,7 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  const packageJson = JSON.parse(fs.readFileSync(__dirname + '/package.json', 'utf8'));
+  const packageJson = require(__dirname + '/package.json');
 
   ejsElectron.data('version', packageJson.version);
 
