@@ -3,9 +3,12 @@
 const {ipcRenderer} = require('electron');
 const {dialog} = require('electron').remote;
 
+const message = require('./message');
 const validation = require('./validation');
 
 document.addEventListener('DOMContentLoaded', function() {
+  const serverStatus = message('server-status');
+
   document.getElementById('directory_select').addEventListener('click', function() {
     dialog.showOpenDialog({
       properties: ['openDirectory'],
@@ -23,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
       port: port,
     });
 
-    showStatusMessage('');
+    serverStatus.hide();
 
     document.querySelectorAll('.user-input').forEach(function (element) {
       element.classList.remove('is-invalid');
@@ -46,17 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   ipcRenderer.on('server-started', function() {
-    showStatusMessage('server started.');
+    serverStatus.show('server started.');
   });
 
   ipcRenderer.on('server-stopped', function() {
-    showStatusMessage('server stopped.');
+    serverStatus.show('server stopped.');
   });
 });
-
-/**
- * @param {string} message
- */
-const showStatusMessage = function(message) {
-  document.getElementById('server-status').innerHTML = message;
-};
