@@ -6,6 +6,13 @@ const {dialog} = require('electron').remote;
 const message = require('./message');
 const validation = require('./validation');
 
+let vm = new Vue({
+  el: '#app',
+  data: {
+    version: require(__dirname + '/../package.json').version,
+  },
+});
+
 document.addEventListener('DOMContentLoaded', function() {
   const serverStatus = message('server-status');
 
