@@ -19,4 +19,11 @@ cp -r node_modules/bootstrap/dist/* app/bootstrap/
 ```
 
 
+## vue
 
+```
+npm install vue
+
+mkdir app/vue
+cp node_modules/vue/dist/vue.min.js app/vue/
+```
