@@ -6,23 +6,27 @@ const {dialog} = require('electron').remote;
 const message = require('./message');
 const validation = require('./validation');
 
-let vm = new Vue({
+const vm = new Vue({
   el: '#app',
   data: {
     version: require(__dirname + '/../package.json').version,
+    directory: '',
+  },
+  methods: {
+    selectDirectory: function() {
+      const vm = this;
+
+      dialog.showOpenDialog({
+        properties: ['openDirectory'],
+      }, function(path) {
+        vm.directory = path[0];
+      });
+    },
   },
 });
 
 document.addEventListener('DOMContentLoaded', function() {
   const serverStatus = message('server-status');
-
-  document.getElementById('directory_select').addEventListener('click', function() {
-    dialog.showOpenDialog({
-      properties: ['openDirectory'],
-    }, function(path) {
-      document.getElementById('directory').value = path[0];
-    });
-  });
 
   document.getElementById('start').addEventListener('click', function () {
     const directory = document.getElementById('directory').value;
