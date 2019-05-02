@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button v-bind:disabled="serverStarted" id="start" type="button" class="btn btn-primary">start</button>
+                <button v-bind:disabled="serverStarted" v-on:click="startServer" id="start" type="button" class="btn btn-primary">start</button>
                 <button v-bind:disabled="serverStopped" v-on:click="stopServer" id="stop" type="button" class="btn btn-secondary">stop</button>
                 <span id="server-status">{{ serverStatus }}</span>
             </div>

@@ -37,6 +37,27 @@ const vm = new Vue({
         vm.directory = path[0];
       });
     },
+    startServer: function() {
+      const vm = this;
+
+      const result = validation.execute({
+        directory: this.directory,
+        port: this.port,
+      });
+
+      this.serverStatus = '';
+
+      Object.keys(result.details).forEach(function(field) {
+        vm.error[field] = result.details[field].isValid === false;
+      });
+
+      if (result.isValid) {
+        ipcRenderer.send('server-start', {
+          directory: this.directory,
+          port: this.port,
+        });
+      }
+    },
     stopServer: function() {
       ipcRenderer.send('server-stop');
     },
@@ -45,26 +66,6 @@ const vm = new Vue({
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('start').addEventListener('click', function () {
-    const result = validation.execute({
-      directory: vm.directory,
-      port: vm.port,
-    });
-
-    vm.serverStatus = '';
-
-    Object.keys(result.details).forEach(function(field) {
-      vm.error[field] = result.details[field].isValid === false;
-    });
-
-    if (result.isValid) {
-      ipcRenderer.send('server-start', {
-        directory: vm.directory,
-        port: vm.port,
-      });
-    }
-  });
-
   ipcRenderer.on('server-started', function() {
     vm.running = true;
     vm.serverStatus = 'server started.';
