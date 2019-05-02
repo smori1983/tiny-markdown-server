@@ -13,6 +13,10 @@ const vm = new Vue({
     port: '3000',
     serverStatus: '',
 
+    error: {
+      directory: false,
+      port: false,
+    },
     running: false,
   },
   computed: {
@@ -52,9 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     vm.serverStatus = '';
 
-    document.querySelectorAll('.user-input').forEach(function (element) {
-      element.classList.remove('is-invalid');
-    });
+    vm.error.directory = false;
+    vm.error.port = false;
 
     if (result.isValid) {
       ipcRenderer.send('server-start', {
@@ -62,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
         port: port,
       });
     } else {
-      result.errors.forEach(function(id) {
-        document.getElementById(id).classList.add('is-invalid');
+      result.errors.forEach(function(field) {
+        vm.error[field] = true;
       });
     }
   });
