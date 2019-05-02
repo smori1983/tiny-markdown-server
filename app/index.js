@@ -58,18 +58,24 @@ const vm = new Vue({
         });
       }
     },
+    startServerDone: function() {
+      this.running = true;
+      this.serverStatus = 'server started.';
+    },
     stopServer: function() {
       ipcRenderer.send('server-stop');
+    },
+    stopServerDone: function () {
+      this.running = false;
+      this.serverStatus = 'server stopped.';
     },
   },
 });
 
 ipcRenderer.on('server-started', function() {
-  vm.running = true;
-  vm.serverStatus = 'server started.';
+  vm.startServerDone();
 });
 
 ipcRenderer.on('server-stopped', function() {
-  vm.running = false;
-  vm.serverStatus = 'server stopped.';
+  vm.stopServerDone();
 });
