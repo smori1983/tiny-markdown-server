@@ -46,12 +46,9 @@ const vm = new Vue({
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('start').addEventListener('click', function () {
-    const directory = vm.directory;
-    const port = vm.port;
-
     const result = validation.execute({
-      directory: directory,
-      port: port,
+      directory: vm.directory,
+      port: vm.port,
     });
 
     vm.serverStatus = '';
@@ -61,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (result.isValid) {
       ipcRenderer.send('server-start', {
-        directory: directory,
-        port: port,
+        directory: vm.directory,
+        port: vm.port,
       });
     } else {
       result.errors.forEach(function(field) {
