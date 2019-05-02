@@ -53,17 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     vm.serverStatus = '';
 
-    vm.error.directory = false;
-    vm.error.port = false;
+    Object.keys(result.details).forEach(function(field) {
+      vm.error[field] = result.details[field].isValid === false;
+    });
 
     if (result.isValid) {
       ipcRenderer.send('server-start', {
         directory: vm.directory,
         port: vm.port,
-      });
-    } else {
-      result.errors.forEach(function(field) {
-        vm.error[field] = true;
       });
     }
   });
