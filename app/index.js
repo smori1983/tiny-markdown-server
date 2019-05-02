@@ -3,7 +3,6 @@
 const {ipcRenderer} = require('electron');
 const {dialog} = require('electron').remote;
 
-const message = require('./message');
 const validation = require('./validation');
 
 const vm = new Vue({
@@ -11,6 +10,17 @@ const vm = new Vue({
   data: {
     version: require(__dirname + '/../package.json').version,
     directory: '',
+    serverStatus: '',
+
+    running: false,
+  },
+  computed: {
+    serverStarted: function() {
+      return this.running === true;
+    },
+    serverStopped: function() {
+      return this.running === false;
+    },
   },
   methods: {
     selectDirectory: function() {
@@ -25,9 +35,8 @@ const vm = new Vue({
   },
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const serverStatus = message('server-status');
 
+document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('start').addEventListener('click', function () {
     const directory = document.getElementById('directory').value;
     const port = document.getElementById('port').value;
@@ -37,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
       port: port,
     });
 
-    serverStatus.hide();
+    vm.serverStatus = '';
 
     document.querySelectorAll('.user-input').forEach(function (element) {
       element.classList.remove('is-invalid');
@@ -60,10 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   ipcRenderer.on('server-started', function() {
-    serverStatus.show('server started.');
+    vm.running = true;
+    vm.serverStatus = 'server started.';
   });
 
   ipcRenderer.on('server-stopped', function() {
-    serverStatus.show('server stopped.');
+    vm.running = false;
+    vm.serverStatus = 'server stopped.';
   });
 });
