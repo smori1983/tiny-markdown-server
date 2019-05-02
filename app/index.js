@@ -32,6 +32,9 @@ const vm = new Vue({
         vm.directory = path[0];
       });
     },
+    stopServer: function() {
+      ipcRenderer.send('server-stop');
+    },
   },
 });
 
@@ -62,10 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(id).classList.add('is-invalid');
       });
     }
-  });
-
-  document.getElementById('stop').addEventListener('click', function () {
-    ipcRenderer.send('server-stop');
   });
 
   ipcRenderer.on('server-started', function() {
