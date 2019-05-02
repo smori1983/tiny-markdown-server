@@ -10,6 +10,7 @@ const vm = new Vue({
   data: {
     version: require(__dirname + '/../package.json').version,
     directory: '',
+    port: '3000',
     serverStatus: '',
 
     running: false,
@@ -41,8 +42,8 @@ const vm = new Vue({
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('start').addEventListener('click', function () {
-    const directory = document.getElementById('directory').value;
-    const port = document.getElementById('port').value;
+    const directory = vm.directory;
+    const port = vm.port;
 
     const result = validation.execute({
       directory: directory,

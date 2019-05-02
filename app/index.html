@@ -13,7 +13,7 @@
     <div class="p-3">
         <form>
             <div class="form-group input-group">
-                <input v-bind:value="directory" id="directory" class="user-input directory form-control" type="text" value="" placeholder="directory">
+                <input v-model="directory" id="directory" class="user-input directory form-control" type="text" placeholder="directory">
                 <div class="input-group-append">
                     <button v-on:click="selectDirectory" class="btn btn-outline-secondary" type="button">Browse</button>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">http://localhost:</span>
                 </div>
-                <input id="port" type="text" class="user-input form-control col-2" value="3000">
+                <input v-model="port" id="port" type="text" class="user-input form-control col-2">
                 <div class="input-group-append">
                     <span class="input-group-text">/</span>
                 </div>
