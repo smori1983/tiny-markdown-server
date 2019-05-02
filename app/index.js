@@ -8,7 +8,6 @@ const validation = require('./validation');
 const vm = new Vue({
   el: '#app',
   data: {
-    version: require(__dirname + '/../package.json').version,
     directory: '',
     port: '3000',
     serverStatus: '',
@@ -20,6 +19,9 @@ const vm = new Vue({
     running: false,
   },
   computed: {
+    version: function() {
+      return require(__dirname + '/../package.json').version;
+    },
     serverStarted: function() {
       return this.running === true;
     },
