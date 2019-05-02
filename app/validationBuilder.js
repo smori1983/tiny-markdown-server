@@ -26,19 +26,28 @@ const build = function(fields) {
    * @returns {validationResult}
    */
   const execute = function(data) {
-    const result = validator.validate(data, schema);
+    const validated = validator.validate(data, schema);
 
     let errors = [];
+    let details = {};
 
-    result.errors.forEach(function (error) {
+    Object.keys(fields).forEach(function(field) {
+      details[field] = { isValid: true };
+    });
+
+    validated.errors.forEach(function (error) {
       // propertyPath may be 'instance'.
       // property will be 'instance.directory' etc.
-      errors.push(error.property.slice(result.propertyPath.length + 1));
+      let field = error.property.slice(validated.propertyPath.length + 1);
+
+      errors.push(field);
+      details[field].isValid = false;
     });
 
     return {
-      isValid: result.valid,
+      isValid: validated.valid,
       errors: errors,
+      details: details,
     };
   };
 
@@ -60,4 +69,5 @@ module.exports.build = build;
  * @typedef {object} validationResult
  * @property {boolean} isValid
  * @property {string[]} errors List of invalid properties
+ * @property {object} details Stores validation result for each field
  */
