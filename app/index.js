@@ -64,15 +64,12 @@ const vm = new Vue({
   },
 });
 
+ipcRenderer.on('server-started', function() {
+  vm.running = true;
+  vm.serverStatus = 'server started.';
+});
 
-document.addEventListener('DOMContentLoaded', function() {
-  ipcRenderer.on('server-started', function() {
-    vm.running = true;
-    vm.serverStatus = 'server started.';
-  });
-
-  ipcRenderer.on('server-stopped', function() {
-    vm.running = false;
-    vm.serverStatus = 'server stopped.';
-  });
+ipcRenderer.on('server-stopped', function() {
+  vm.running = false;
+  vm.serverStatus = 'server stopped.';
 });
