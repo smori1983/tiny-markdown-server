@@ -1,11 +1,8 @@
 'use strict';
 
-const ejsElectron = require('ejs-electron');
-
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
-
 const app = electron.app;
 
 let mainWindow;
@@ -16,10 +13,6 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  const packageJson = require(__dirname + '/package.json');
-
-  ejsElectron.data('version', packageJson.version);
-
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
