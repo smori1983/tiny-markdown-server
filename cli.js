@@ -1,6 +1,7 @@
 'use strict';
 
 const yargs = require('yargs');
+const mds = require('./lib/markdownServer');
 
 yargs.command({
   command: ['serve <directory> <port>', '$0'],
@@ -16,11 +17,7 @@ yargs.command({
     });
   },
   handler: function(argv) {
-    const mds = require('./lib/markdownServer')(argv.directory);
-
-    require('http').createServer(function(request, response) {
-      mds.serve(request, response);
-    }).listen(argv.port);
+    mds.create(argv.directory).listen(argv.port);
   },
 });
 

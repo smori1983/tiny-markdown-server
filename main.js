@@ -32,15 +32,13 @@ app.on('ready', function() {
 });
 
 ipcMain.on('server-start', function(event, args) {
-  const mds = require('./lib/markdownServer')(args.directory);
+  const mds = require('./lib/markdownServer');
 
   if (server) {
     server.close();
   }
 
-  server = require('http').createServer(function(request, response) {
-    mds.serve(request, response);
-  });
+  server = mds.create(args.directory);
   server.keepAliveTimeout = 10;
   server.listen(args.port);
 

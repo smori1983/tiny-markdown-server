@@ -7,11 +7,11 @@
     "bootstrap": "^4.3.1",
     "ejs": "^2.6.1",
     "ejs-electron": "^2.0.3",
+    "express": "^4.16.4",
     "github-markdown-css": "^3.0.1",
     "jquery": "^3.3.1",
     "jsonschema": "^1.2.4",
     "markdown-it": "^8.4.2",
-    "mime": "^2.4.0",
     "yargs": "^13.2.2"
   },
   "devDependencies": {
