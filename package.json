@@ -12,7 +12,6 @@
     "jquery": "^3.3.1",
     "jsonschema": "^1.2.4",
     "markdown-it": "^8.4.2",
-    "mime": "^2.4.0",
     "yargs": "^13.2.2"
   },
   "devDependencies": {
