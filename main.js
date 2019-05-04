@@ -38,9 +38,7 @@ ipcMain.on('server-start', function(event, args) {
     server.close();
   }
 
-  server = mds.create(args.directory);
-  server.keepAliveTimeout = 10;
-  server.listen(args.port);
+  server = mds.serve(args.directory, args.port);
 
   event.sender.send('server-started');
 });

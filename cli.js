@@ -17,7 +17,7 @@ yargs.command({
     });
   },
   handler: function(argv) {
-    mds.create(argv.directory).listen(argv.port);
+    mds.serve(argv.directory, argv.port);
   },
 });
 
