@@ -10,15 +10,23 @@
     "!files_builtin/highlight.zip"
   ],
   "win": {
-    "target": {
-      "target": "portable",
-      "arch": "x64"
-    }
+    "target": [
+      {
+        "target": "portable",
+        "arch": "x64"
+      }
+    ]
   },
   "mac": {
-    "target": {
-      "target": "dmg",
-      "arch": "x64"
-    }
+    "target": [
+      {
+        "target": "dmg",
+        "arch": "x64"
+      },
+      {
+        "target": "zip",
+        "arch": "x64"
+      }
+    ]
   }
 }
