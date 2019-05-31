@@ -10,6 +10,12 @@
     background-color: #444;
 }
 
+@media print {
+    .menu {
+        display: none;
+    }
+}
+
 .menu a {
     color: #fff;
     text-decoration: none;
@@ -17,6 +23,12 @@
 
 .main {
     margin-top: 50px;
+}
+
+@media print {
+    .main {
+        margin-top: 0px;
+    }
 }
 
 .markdown-body {
