@@ -19,7 +19,8 @@
     "electron": "^4.1.4",
     "electron-builder": "^20.39.0",
     "eslint": "^5.16.0",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "watch": "^1.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
