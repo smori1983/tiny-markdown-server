@@ -7,10 +7,6 @@ node_js:
   - node
   - lts/*
 
-before_install:
-  - brew install wine
-  - brew install mono
-
 script:
   - npm run build:mac
   - npm run build:win
