@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next
+## v1.0.1
 
 ### Bug fix
 
