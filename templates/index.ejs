@@ -10,7 +10,7 @@
         <h1>Files</h1>
         <ul>
             <% files.forEach(function(file) { %>
-            <li><a href="/<%= file %>"><%= file %></a></li>
+            <li><a href="<%- file.path %>"><%= file.notation %></a></li>
             <% }); %>
         </ul>
     </div>
