@@ -5,6 +5,7 @@
 ### Development
 
 - Travis CI
+- `mocha`
 
 ## v1.0.1
 
