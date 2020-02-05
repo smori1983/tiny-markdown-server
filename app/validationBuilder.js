@@ -11,6 +11,7 @@ const build = function(fields) {
   const schema = {
     'type': 'object',
     'properties': fields,
+    'additionalProperties': false,
   };
 
   /**

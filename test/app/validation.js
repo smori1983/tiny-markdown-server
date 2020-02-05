@@ -79,5 +79,17 @@ describe('app.validation', function () {
       assert.strictEqual(result.isValid, false);
       assert.deepStrictEqual(result.errors, ['port']);
     });
+
+    it('unknown property is rejected', function () {
+      const data = {
+        directory: __dirname,
+        port: '80',
+        foo: 'bar',
+      };
+
+      const result = SUT.execute(data);
+
+      assert.strictEqual(result.isValid, false);
+    });
   });
 });
