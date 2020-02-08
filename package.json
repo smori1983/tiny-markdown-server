@@ -1,6 +1,6 @@
 {
   "name": "tiny-markdown-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Displays markdown files in the browser.",
   "main": "main.js",
   "dependencies": {
