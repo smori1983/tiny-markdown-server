@@ -53,5 +53,32 @@ describe('lib.indexUtil', function () {
 
       assert.deepStrictEqual(result, expected);
     });
+
+    it('has directory - 4 files found', function () {
+      const dir = __dirname + '/../../test_resource/dir_04';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      const expected = [
+        {
+          path: '/dir_04_01/file_04.md',
+          notation: 'dir_04_01/file_04.md',
+        },
+        {
+          path: '/dir_04_01/file_05.markdown',
+          notation: 'dir_04_01/file_05.markdown',
+        },
+        {
+          path: '/file_01.md',
+          notation: 'file_01.md',
+        },
+        {
+          path: '/file_03.markdown',
+          notation: 'file_03.markdown',
+        },
+      ];
+
+      assert.deepStrictEqual(result, expected);
+    });
   });
 });
