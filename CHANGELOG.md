@@ -2,6 +2,10 @@
 
 ## Next
 
+### Feature
+
+- Increase supported file extensions to `.md` and `.markdown`
+
 ### Development
 
 - Travis CI
