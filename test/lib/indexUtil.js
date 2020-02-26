@@ -137,4 +137,46 @@ describe('lib.indexUtil', function () {
       assert.strictEqual(result[1], 'hello, world.');
     });
   });
+
+  describe('title', function () {
+    it('should find #', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[0].title, 'file_01');
+    });
+
+    it('should find ##', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[1].title, 'file_02');
+    });
+
+    it('should find ###', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[2].title, 'file_03');
+    });
+
+    it('should find ######', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[3].title, 'file_04');
+    });
+
+    it('should not find any heading line', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[4].title, 'file_05.md');
+    });
+  });
 });
