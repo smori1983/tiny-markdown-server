@@ -94,14 +94,14 @@ describe('lib.indexUtil', function () {
   });
 
   describe('regexp', function () {
-    it('string not matched for # - 1', function () {
+    it('string not matched for # - no space after #', function () {
       const text = '#hello, world.';
       const result = text.match(/^#+\s+(.+)$/);
 
       assert.strictEqual(result, null);
     });
 
-    it('string not matched for # - 2', function () {
+    it('string not matched for # - space at head of line', function () {
       const text = ' # hello, world.';
       const result = text.match(/^#+\s+(.+)$/);
 
@@ -115,14 +115,14 @@ describe('lib.indexUtil', function () {
       assert.strictEqual(result[1], 'hello, world.');
     });
 
-    it('string not matched for ## - 1', function () {
+    it('string not matched for ## - no space after ##', function () {
       const text = '##hello, world.';
       const result = text.match(/^#+\s+(.+)$/);
 
       assert.strictEqual(result, null);
     });
 
-    it('string not matched for ## - 2', function () {
+    it('string not matched for ## - space at head of line', function () {
       const text = ' ## hello, world.';
       const result = text.match(/^#+\s+(.+)$/);
 
