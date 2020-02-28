@@ -170,12 +170,36 @@ describe('lib.indexUtil', function () {
       assert.strictEqual(result[3].title, 'file_04');
     });
 
-    it('should not find any heading line', function () {
+    it('should not find any header line - no header lines', function () {
       const dir = __dirname + '/../../test_resource/dir_08';
 
       const result = SUT.scanMarkdownFiles(dir);
 
       assert.strictEqual(result[4].title, 'file_05.md');
+    });
+
+    it('should not find any header line - no space after hash character', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[5].title, 'file_06.md');
+    });
+
+    it('should find # - 3 spaces after hash character', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[6].title, 'file_07');
+    });
+
+    it('should not find any header line - 4 spaces after hash character', function () {
+      const dir = __dirname + '/../../test_resource/dir_08';
+
+      const result = SUT.scanMarkdownFiles(dir);
+
+      assert.strictEqual(result[7].title, 'file_08.md');
     });
   });
 });
