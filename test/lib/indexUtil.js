@@ -91,115 +91,71 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[1].notation, 'file?01.md');
       });
     });
-  });
 
-  describe('regexp', function () {
-    it('string not matched for # - no space after #', function () {
-      const text = '#hello, world.';
-      const result = text.match(/^#+\s+(.+)$/);
+    describe('title', function () {
+      it('should find #', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-      assert.strictEqual(result, null);
-    });
+        const result = SUT.scanMarkdownFiles(dir);
 
-    it('string not matched for # - space at head of line', function () {
-      const text = ' # hello, world.';
-      const result = text.match(/^#+\s+(.+)$/);
+        assert.strictEqual(result[0].title, 'file_01');
+      });
 
-      assert.strictEqual(result, null);
-    });
+      it('should find ##', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-    it('string matched for #', function () {
-      const text = '# hello, world.';
-      const result = text.match(/^#+\s+(.+)$/);
+        const result = SUT.scanMarkdownFiles(dir);
 
-      assert.strictEqual(result[1], 'hello, world.');
-    });
+        assert.strictEqual(result[1].title, 'file_02');
+      });
 
-    it('string not matched for ## - no space after ##', function () {
-      const text = '##hello, world.';
-      const result = text.match(/^#+\s+(.+)$/);
+      it('should find ###', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-      assert.strictEqual(result, null);
-    });
+        const result = SUT.scanMarkdownFiles(dir);
 
-    it('string not matched for ## - space at head of line', function () {
-      const text = ' ## hello, world.';
-      const result = text.match(/^#+\s+(.+)$/);
+        assert.strictEqual(result[2].title, 'file_03');
+      });
 
-      assert.strictEqual(result, null);
-    });
+      it('should find ######', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-    it('string matched for ##', function () {
-      const text = '## hello, world.';
-      const result = text.match(/^#+\s+(.+)$/);
+        const result = SUT.scanMarkdownFiles(dir);
 
-      assert.strictEqual(result[1], 'hello, world.');
-    });
-  });
+        assert.strictEqual(result[3].title, 'file_04');
+      });
 
-  describe('title', function () {
-    it('should find #', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
+      it('should not find any header line - no header lines', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-      const result = SUT.scanMarkdownFiles(dir);
+        const result = SUT.scanMarkdownFiles(dir);
 
-      assert.strictEqual(result[0].title, 'file_01');
-    });
+        assert.strictEqual(result[4].title, 'file_05.md');
+      });
 
-    it('should find ##', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
+      it('should not find any header line - no space after hash character', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-      const result = SUT.scanMarkdownFiles(dir);
+        const result = SUT.scanMarkdownFiles(dir);
 
-      assert.strictEqual(result[1].title, 'file_02');
-    });
+        assert.strictEqual(result[5].title, 'file_06.md');
+      });
 
-    it('should find ###', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
+      it('should find # - 3 spaces after hash character', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-      const result = SUT.scanMarkdownFiles(dir);
+        const result = SUT.scanMarkdownFiles(dir);
 
-      assert.strictEqual(result[2].title, 'file_03');
-    });
+        assert.strictEqual(result[6].title, 'file_07');
+      });
 
-    it('should find ######', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
+      it('should not find any header line - 4 spaces after hash character', function () {
+        const dir = __dirname + '/../../test_resource/dir_08';
 
-      const result = SUT.scanMarkdownFiles(dir);
+        const result = SUT.scanMarkdownFiles(dir);
 
-      assert.strictEqual(result[3].title, 'file_04');
-    });
-
-    it('should not find any header line - no header lines', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
-
-      const result = SUT.scanMarkdownFiles(dir);
-
-      assert.strictEqual(result[4].title, 'file_05.md');
-    });
-
-    it('should not find any header line - no space after hash character', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
-
-      const result = SUT.scanMarkdownFiles(dir);
-
-      assert.strictEqual(result[5].title, 'file_06.md');
-    });
-
-    it('should find # - 3 spaces after hash character', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
-
-      const result = SUT.scanMarkdownFiles(dir);
-
-      assert.strictEqual(result[6].title, 'file_07');
-    });
-
-    it('should not find any header line - 4 spaces after hash character', function () {
-      const dir = __dirname + '/../../test_resource/dir_08';
-
-      const result = SUT.scanMarkdownFiles(dir);
-
-      assert.strictEqual(result[7].title, 'file_08.md');
+        assert.strictEqual(result[7].title, 'file_08.md');
+      });
     });
   });
 });
