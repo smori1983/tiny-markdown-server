@@ -12,10 +12,12 @@
     "jquery": "^3.4.1",
     "jsonschema": "^1.2.5",
     "markdown-it": "^8.4.2",
+    "n-readlines": "^1.0.0",
     "popper.js": "^1.16.1",
     "yargs": "^13.3.0"
   },
   "devDependencies": {
+    "@types/buffers": "^0.1.31",
     "@types/express": "^4.17.2",
     "@types/json-schema": "^7.0.3",
     "@types/yargs": "^15.0.3",

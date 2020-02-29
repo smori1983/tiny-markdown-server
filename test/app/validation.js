@@ -1,5 +1,4 @@
-const describe = require('mocha').describe;
-const it = require('mocha').it;
+const { describe, it } = require('mocha');
 const assert = require('assert');
 const SUT = require('../../app/validation');
 
