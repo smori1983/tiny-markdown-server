@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <head>
 <%- include('common/head') %>
@@ -7,12 +8,12 @@
 <%- include('common/menu') %>
 <div class="main">
     <div class="markdown-body">
-        <h1>Files</h1>
-        <ul>
-            <% files.forEach(function(file) { %>
-            <li><a href="<%- file.path %>"><%= file.notation %></a></li>
-            <% }); %>
-        </ul>
+        <% files.forEach(function(file) { %>
+        <div class="mb-2">
+            <div class="mb-0"><a href="<%- file.path %>"><%= file.title %></a></div>
+            <div class="mb-0 small text-muted text-monospace"><%= file.notation %></div>
+        </div>
+        <% }); %>
     </div>
 </div>
 </body>
