@@ -1,6 +1,7 @@
 'use strict';
 
 const browserSync = require('browser-sync');
+const sprintf = require('sprintf-js').sprintf;
 const yargs = require('yargs');
 const mds = require('./lib/markdownServer');
 
@@ -27,7 +28,7 @@ yargs.command({
         /** @type {module:net.AddressInfo} */
         const addressInfo = server.address();
         browserSync({
-          proxy: 'http://' + addressInfo.address + ':' + addressInfo.port,
+          proxy: sprintf('http://%s:%s', addressInfo.address, addressInfo.port),
           files: '.',
         });
       }
