@@ -21,18 +21,17 @@ yargs.command({
       type: 'boolean',
     });
   },
-  handler: function(argv) {
-    const server = mds.serve(argv.directory, argv.port);
-
-    /** @type {module:net.AddressInfo} */
-    const addressInfo = server.address();
-
-    if (argv.autoDeploy === true) {
-      browserSync({
-        proxy: 'http://localhost:' + addressInfo.port,
-        files: '.',
-      });
-    }
+  handler: function (argv) {
+    mds.serve(argv.directory, argv.port, function (server) {
+      if (argv.autoDeploy === true) {
+        /** @type {module:net.AddressInfo} */
+        const addressInfo = server.address();
+        browserSync({
+          proxy: 'http://' + addressInfo.address + ':' + addressInfo.port,
+          files: '.',
+        });
+      }
+    });
   },
 });
 
