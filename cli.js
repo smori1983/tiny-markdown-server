@@ -1,5 +1,6 @@
 'use strict';
 
+const browserSync = require('browser-sync');
 const yargs = require('yargs');
 const mds = require('./lib/markdownServer');
 
@@ -15,9 +16,23 @@ yargs.command({
       describe: 'The port to be listened',
       type: 'number',
     });
+    yargs.option('auto-deploy', {
+      description: 'Reload when source files changed',
+      type: 'boolean',
+    });
   },
   handler: function(argv) {
-    mds.serve(argv.directory, argv.port);
+    const server = mds.serve(argv.directory, argv.port);
+
+    /** @type {module:net.AddressInfo} */
+    const addressInfo = server.address();
+
+    if (argv.autoDeploy === true) {
+      browserSync({
+        proxy: 'http://localhost:' + addressInfo.port,
+        files: '.',
+      });
+    }
   },
 });
 
