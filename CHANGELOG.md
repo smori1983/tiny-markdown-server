@@ -10,6 +10,7 @@
 
 - Travis CI
 - `mocha`
+- `--auto-deploy` option in `cli.js`
 
 ## v1.0.2
 

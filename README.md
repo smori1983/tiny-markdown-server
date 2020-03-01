@@ -22,7 +22,7 @@ npm run build:win
 ## CLI
 
 ```
-cli.js serve <directory> <port>
+cli.js serve [--auto-deploy] <directory> <port>
 ```
 
 ### Example
