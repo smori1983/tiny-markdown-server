@@ -27,9 +27,14 @@ yargs.command({
       if (argv.autoDeploy === true) {
         /** @type {module:net.AddressInfo} */
         const addressInfo = server.address();
-        browserSync({
+        const bs = browserSync.create();
+        bs.init({
           proxy: sprintf('http://%s:%s', addressInfo.address, addressInfo.port),
-          files: '.',
+          files: [
+            'files_builtin',
+            'lib',
+            'templates',
+          ],
         });
       }
     });
