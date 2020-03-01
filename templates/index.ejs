@@ -9,9 +9,9 @@
 <div class="main">
     <div class="markdown-body">
         <% files.forEach(function(file) { %>
-        <div class="mb-2">
-            <div class="mb-0"><a href="<%- file.path %>"><%= file.title %></a></div>
-            <div class="mb-0 small text-muted text-monospace"><%= file.notation %></div>
+        <div class="border-bottom">
+            <div><a href="<%- file.path %>"><%= file.title %></a></div>
+            <div class="small text-muted text-monospace"><%= file.notation %></div>
         </div>
         <% }); %>
     </div>
