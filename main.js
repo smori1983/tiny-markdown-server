@@ -9,6 +9,8 @@ const ipcMain = electron.ipcMain;
 const app = electron.app;
 
 let mainWindow;
+
+/** @type {module:http.Server} */
 let server;
 
 app.on('window-all-closed', function() {
