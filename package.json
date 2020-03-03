@@ -20,14 +20,14 @@
   "devDependencies": {
     "@types/buffers": "^0.1.31",
     "@types/express": "^4.17.2",
-    "@types/json-schema": "^7.0.3",
-    "@types/yargs": "^15.0.3",
+    "@types/json-schema": "^7.0.4",
+    "@types/yargs": "^15.0.4",
     "browser-sync": "^2.26.7",
     "electron": "^4.2.12",
     "electron-builder": "^20.44.4",
     "eslint": "^5.16.0",
     "istanbul": "^0.4.5",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.2",
     "sinon": "^8.1.1",
     "watch": "^1.0.2"
   },
