@@ -1,6 +1,6 @@
 {
   "name": "tiny-markdown-server",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Displays markdown files in the browser.",
   "main": "main.js",
   "dependencies": {
@@ -12,16 +12,29 @@
     "jquery": "^3.4.1",
     "jsonschema": "^1.2.5",
     "markdown-it": "^8.4.2",
+    "n-readlines": "^1.0.0",
     "popper.js": "^1.16.1",
+    "sprintf-js": "^1.1.2",
     "yargs": "^13.3.0"
   },
   "devDependencies": {
+    "@types/buffers": "^0.1.31",
+    "@types/express": "^4.17.2",
+    "@types/json-schema": "^7.0.4",
+    "@types/yargs": "^15.0.4",
+    "browser-sync": "^2.26.7",
     "electron": "^4.2.12",
     "electron-builder": "^20.44.4",
-    "eslint": "^5.16.0"
+    "eslint": "^5.16.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.2.2",
+    "sinon": "^8.1.1",
+    "watch": "^1.0.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/*",
+    "test:coverage": "istanbul cover --print both _mocha -- test/*",
+    "watch:test": "watch 'npm run test' app/ lib/ test/ --interval=1 --ignoreDotFiles",
     "app": "electron main.js",
     "build": "npm run build:mac && npm run build:win",
     "build:mac": "node build_scripts/build-mac.js",

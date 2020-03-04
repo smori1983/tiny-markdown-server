@@ -7,7 +7,9 @@
     "!.idea/**/*",
     "!_dist/**/*",
     "!build_scripts/**/*",
-    "!files_builtin/highlight.zip"
+    "!files_builtin/highlight.zip",
+    "!test/**/*",
+    "!test_resource/**/*"
   ],
   "win": {
     "target": [

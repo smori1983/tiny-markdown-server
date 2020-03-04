@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.1.0
+
+### Feature
+
+- Increase supported file extensions to `.md` and `.markdown`
+
+### Development
+
+- Travis CI
+- `mocha`
+- `--auto-deploy` option in `cli.js`
+
 ## v1.0.2
 
 ### Bug fix

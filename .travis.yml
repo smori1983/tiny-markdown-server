@@ -1,0 +1,13 @@
+os: osx
+osx_image: xcode10.2
+
+language: node_js
+
+node_js:
+  - node
+  - lts/*
+
+script:
+  - npm run test
+  - npm run build:mac
+  - npm run build:win
