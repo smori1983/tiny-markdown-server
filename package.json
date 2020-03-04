@@ -24,7 +24,7 @@
     "@types/yargs": "^15.0.4",
     "browser-sync": "^2.26.7",
     "electron": "^4.2.12",
-    "electron-builder": "^20.44.4",
+    "electron-builder": "^22.3.6",
     "eslint": "^5.16.0",
     "istanbul": "^0.4.5",
     "mocha": "^6.2.2",
