@@ -15,6 +15,36 @@ describe('middleware.search', function () {
     assert.strictEqual(next.calledOnce, true);
   });
 
+  it('should handle the request without query parameter', function () {
+    const dir = __dirname + '/../../test_resource/search_01';
+
+    const req = {method: 'GET', query: {}};
+    const res = {json: sinon.spy()};
+    const next = sinon.spy();
+
+    SUT(dir)(req, res, next);
+
+    /** @type {IndexItem[]} */
+    const json = res.json.getCall(0).args[0];
+
+    assert.strictEqual(json.length, 0);
+  });
+
+  it('should not response any result for empty query', function () {
+    const dir = __dirname + '/../../test_resource/search_01';
+
+    const req = {method: 'GET', query: {word: ''}};
+    const res = {json: sinon.spy()};
+    const next = sinon.spy();
+
+    SUT(dir)(req, res, next);
+
+    /** @type {IndexItem[]} */
+    const json = res.json.getCall(0).args[0];
+
+    assert.strictEqual(json.length, 0);
+  });
+
   it('matched the word', function () {
     const dir = __dirname + '/../../test_resource/search_01';
 
@@ -47,21 +77,6 @@ describe('middleware.search', function () {
     assert.strictEqual(json.length, 1);
     assert.strictEqual(json[0].notation, 'file_01.md');
     assert.strictEqual(next.notCalled, true);
-  });
-
-  it('should not response any result for empty query', function () {
-    const dir = __dirname + '/../../test_resource/search_01';
-
-    const req = {method: 'GET', query: {word: ''}};
-    const res = {json: sinon.spy()};
-    const next = sinon.spy();
-
-    SUT(dir)(req, res, next);
-
-    /** @type {IndexItem[]} */
-    const json = res.json.getCall(0).args[0];
-
-    assert.strictEqual(json.length, 0);
   });
 
   it('should handle multiple words', function () {
