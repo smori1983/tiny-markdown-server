@@ -1,5 +1,16 @@
 # LOG
 
+## jquery
+
+version: `3.4.1`
+
+```
+npm install jquery
+
+mkdir -p files_builtin/jquery
+cp node_modules/jquery/dist/jquery.min.js files_builtin/jquery/
+```
+
 ## bootstrap
 
 version: `4.4.1`
