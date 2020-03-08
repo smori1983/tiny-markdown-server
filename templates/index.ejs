@@ -5,16 +5,18 @@
 <title>Top</title>
 </head>
 <body>
-<%- include('common/menu') %>
+<%- include('common/menu_index') %>
 <div class="main">
     <div class="container-md">
         <% files.forEach(function(file) { %>
-        <div class="border-bottom">
+        <div class="border-bottom tms-item">
             <div><a href="<%- file.path %>"><%= file.title %></a></div>
-            <div class="small text-muted text-monospace"><%= file.notation %></div>
+            <div class="small text-muted text-monospace tms-notation"><%= file.notation %></div>
         </div>
         <% }); %>
     </div>
 </div>
+<script src="/-/jquery/jquery.min.js"></script>
+<script src="/-/index.js"></script>
 </body>
 </html>
