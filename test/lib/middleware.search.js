@@ -1,4 +1,5 @@
 const { describe, it } = require('mocha');
+const { given } = require('mocha-testdata');
 const assert = require('assert');
 const sinon = require('sinon');
 const SUT = require('../../lib/middleware.search');
@@ -45,27 +46,14 @@ describe('middleware.search', function () {
     assert.strictEqual(json.length, 0);
   });
 
-  it('matched the word', function () {
+  given(
+    'HELLO',
+    'Hello',
+    'hello',
+  ).it('should match as case-insensitive', function (word) {
     const dir = __dirname + '/../../test_resource/search_01';
 
-    const req = {method: 'GET', query: {word: 'Hello'}};
-    const res = {json: sinon.spy()};
-    const next = sinon.spy();
-
-    SUT(dir)(req, res, next);
-
-    /** @type {IndexItem[]} */
-    const json = res.json.getCall(0).args[0];
-
-    assert.strictEqual(json.length, 1);
-    assert.strictEqual(json[0].notation, 'file_01.md');
-    assert.strictEqual(next.notCalled, true);
-  });
-
-  it('matched the word - case insensitive', function () {
-    const dir = __dirname + '/../../test_resource/search_01';
-
-    const req = {method: 'GET', query: {word: 'hello'}};
+    const req = {method: 'GET', query: {word: word}};
     const res = {json: sinon.spy()};
     const next = sinon.spy();
 
