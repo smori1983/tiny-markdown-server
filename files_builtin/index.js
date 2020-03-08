@@ -21,13 +21,13 @@ $(function () {
    * @param {IndexItem[]} data
    */
   const render = function (data) {
-    const notations = data.map(function (item) {
-      return item.notation;
+    const targets = data.map(function (item) {
+      return item.notation_md5;
     });
 
     $('.tms-item').each(function (idx, item) {
-      const notation = $(item).find('.tms-notation').text();
-      if (notations.indexOf(notation) >= 0) {
+      const md5 = $(item).data('tms-item-md5');
+      if (targets.indexOf(md5) >= 0) {
         $(item).show();
       } else {
         $(item).hide();
