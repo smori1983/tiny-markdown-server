@@ -4,6 +4,18 @@ const SUT = require('../../lib/indexUtil');
 
 describe('lib.indexUtil', function () {
   describe('scanMarkdownFiles', function () {
+    describe('ignored directories', function () {
+      it('should ignore .dir_02', function () {
+        const dir = __dirname + '/../../test_resource/ignore_01';
+
+        const result = SUT.scanMarkdownFiles(dir);
+
+        assert.strictEqual(result.length, 2);
+        assert.strictEqual(result[0].title, 'file_02');
+        assert.strictEqual(result[1].title, 'file_01');
+      });
+    });
+
     describe('file extension', function () {
       it('.md - 1 file found', function () {
         const dir = __dirname + '/../../test_resource/dir_01';
