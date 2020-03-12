@@ -1,4 +1,17 @@
 $(function () {
+  const $form = $('#tms-search');
+
+  $form.on('submit', function (e) {
+    e.preventDefault();
+
+    const word = $(this).find('input[name=word]').val();
+    if (word.length === 0) {
+      reset();
+    } else {
+      search(word);
+    }
+  });
+
   const $items = $('.tms-item');
 
   const reset = function () {
@@ -36,17 +49,4 @@ $(function () {
       }
     });
   };
-
-  const $form = $('#tms-search');
-
-  $form.on('submit', function (e) {
-    e.preventDefault();
-
-    const word = $(this).find('input[name=word]').val();
-    if (word.length === 0) {
-      reset();
-    } else {
-      search(word);
-    }
-  });
 });
