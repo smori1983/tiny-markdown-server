@@ -8,7 +8,7 @@ $(function () {
    */
   const search = function (word) {
     $.ajax({
-      url: '/-/search',
+      url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
       data: {
         word: word,
       },
