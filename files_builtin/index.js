@@ -1,6 +1,8 @@
 $(function () {
+  const $items = $('.tms-item');
+
   const reset = function () {
-    $('.tms-item').show();
+    $items.show();
   };
 
   /**
@@ -25,7 +27,7 @@ $(function () {
       return item.notation_md5;
     });
 
-    $('.tms-item').each(function (idx, item) {
+    $items.each(function (idx, item) {
       const md5 = $(item).data('tms-item-md5');
       if (targets.indexOf(md5) >= 0) {
         $(item).show();
