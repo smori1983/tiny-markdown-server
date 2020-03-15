@@ -22,6 +22,8 @@ $(function () {
    * @param {string} word
    */
   const search = function (word) {
+    startSearch();
+
     $.ajax({
       url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
       data: {
@@ -48,5 +50,15 @@ $(function () {
         $(item).hide();
       }
     });
+
+    endSearch();
   };
+
+  const startSearch = function () {
+    $('#tms-search-spinner').removeClass('d-none');
+  };
+
+  const endSearch = function () {
+    $('#tms-search-spinner').addClass('d-none');
+  }
 });
