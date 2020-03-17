@@ -15,6 +15,17 @@ $(function () {
     };
   })();
 
+  const uiControl = (function () {
+    return {
+      startSearch: function () {
+        $('#tms-search-spinner').removeClass('d-none');
+      },
+      endSearch: function () {
+        $('#tms-search-spinner').addClass('d-none');
+      },
+    };
+  })();
+
   const $form = $('#tms-search');
 
   $form.on('submit', function (e) {
@@ -45,7 +56,7 @@ $(function () {
    * @param {string} word
    */
   const search = function (word) {
-    startSearch();
+    uiControl.startSearch();
 
     $.ajax({
       url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
@@ -74,15 +85,7 @@ $(function () {
       }
     });
 
-    endSearch();
+    uiControl.endSearch();
     formControl.unlock();
   };
-
-  const startSearch = function () {
-    $('#tms-search-spinner').removeClass('d-none');
-  };
-
-  const endSearch = function () {
-    $('#tms-search-spinner').addClass('d-none');
-  }
 });
