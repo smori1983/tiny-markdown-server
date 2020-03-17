@@ -1,8 +1,41 @@
 $(function () {
+  const formControl = (function () {
+    let locked = false;
+
+    return {
+      lock: function () {
+        locked = true;
+      },
+      locking: function () {
+        return locked === true;
+      },
+      unlock: function () {
+        locked = false;
+      },
+    };
+  })();
+
+  const uiControl = (function () {
+    return {
+      startSearch: function () {
+        $('#tms-search-spinner').removeClass('d-none');
+      },
+      endSearch: function () {
+        $('#tms-search-spinner').addClass('d-none');
+      },
+    };
+  })();
+
   const $form = $('#tms-search');
 
   $form.on('submit', function (e) {
     e.preventDefault();
+
+    if (formControl.locking()) {
+      return;
+    }
+
+    formControl.lock();
 
     const word = $(this).find('input[name=word]').val();
     if (word.length === 0) {
@@ -16,13 +49,14 @@ $(function () {
 
   const reset = function () {
     $items.show();
+    formControl.unlock();
   };
 
   /**
    * @param {string} word
    */
   const search = function (word) {
-    startSearch();
+    uiControl.startSearch();
 
     $.ajax({
       url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
@@ -51,14 +85,7 @@ $(function () {
       }
     });
 
-    endSearch();
+    uiControl.endSearch();
+    formControl.unlock();
   };
-
-  const startSearch = function () {
-    $('#tms-search-spinner').removeClass('d-none');
-  };
-
-  const endSearch = function () {
-    $('#tms-search-spinner').addClass('d-none');
-  }
 });
