@@ -5,7 +5,7 @@ const SUT = require('../../lib/indexUtil');
 describe('lib.indexUtil', function () {
   describe('scanMarkdownFiles', function () {
     describe('ignored directories', function () {
-      it('should ignore .dir_02', function () {
+      it('should ignore DOT directory', function () {
         const dir = __dirname + '/../../test_resource/ignore_01';
 
         const result = SUT.scanMarkdownFiles(dir);
