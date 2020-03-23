@@ -23,6 +23,14 @@ $(function () {
       endSearch: function () {
         $('#tms-search-spinner').addClass('d-none');
       },
+      /**
+       * @param {number} [value]
+       */
+      updateItemsCount: function (value) {
+        const current = (typeof value === 'number') ? value : $('#tms-items-total').text();
+
+        $('#tms-items-current').text(current);
+      },
     };
   })();
 
@@ -49,6 +57,7 @@ $(function () {
 
   const reset = function () {
     $items.show();
+    uiControl.updateItemsCount();
     formControl.unlock();
   };
 
@@ -85,6 +94,7 @@ $(function () {
       }
     });
 
+    uiControl.updateItemsCount(data.length);
     uiControl.endSearch();
     formControl.unlock();
   };

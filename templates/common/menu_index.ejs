@@ -5,6 +5,13 @@
             <div class="spinner-border spinner-border-sm text-light mr-2 d-none" role="status" id="tms-search-spinner">
                 <span class="sr-only">Loading...</span>
             </div>
+
+            <div class="text-white mr-2">
+                <div class="float-left" id="tms-items-current"><%= files.length %></div>
+                <div class="float-left mx-1">/</div>
+                <div class="float-left" id="tms-items-total"><%= files.length %></div>
+            </div>
+
             <input class="form-control mr-2" type="text" placeholder="Search" name="word">
             <button class="btn btn-outline-light" type="submit">Search</button>
         </form>
