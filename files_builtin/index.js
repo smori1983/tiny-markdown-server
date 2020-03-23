@@ -46,8 +46,6 @@ $(function () {
       return;
     }
 
-    formControl.lock();
-
     const word = $(this).find('input[name=word]').val();
     if (word.length === 0) {
       reset();
@@ -59,6 +57,7 @@ $(function () {
   const $items = $('.tms-item');
 
   const reset = function () {
+    formControl.lock();
     uiControl.beginSearch();
     $items.show();
     uiControl.updateItemCount();
@@ -70,6 +69,7 @@ $(function () {
    * @param {string} word
    */
   const search = function (word) {
+    formControl.lock();
     uiControl.beginSearch();
 
     $.ajax({
