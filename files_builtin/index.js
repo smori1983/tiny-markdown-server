@@ -59,8 +59,10 @@ $(function () {
   const $items = $('.tms-item');
 
   const reset = function () {
+    uiControl.beginSearch();
     $items.show();
     uiControl.updateItemCount();
+    uiControl.endSearch();
     formControl.unlock();
   };
 
