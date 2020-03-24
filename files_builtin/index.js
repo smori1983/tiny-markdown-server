@@ -59,8 +59,7 @@ $(function () {
   const reset = function () {
     formControl.lock();
     uiControl.beginSearch();
-    $items.show();
-    uiControl.updateItemCount();
+    itemControl.show();
     uiControl.endSearch();
     formControl.unlock();
   };
@@ -86,21 +85,36 @@ $(function () {
    * @param {IndexItem[]} data
    */
   const render = function (data) {
-    const targets = data.map(function (item) {
-      return item.notation_md5;
-    });
-
-    $items.each(function (idx, item) {
-      const md5 = $(item).data('tms-item-md5');
-      if (targets.indexOf(md5) >= 0) {
-        $(item).show();
-      } else {
-        $(item).hide();
-      }
-    });
-
-    uiControl.updateItemCount(data.length);
+    itemControl.show(data);
     uiControl.endSearch();
     formControl.unlock();
   };
+
+  const itemControl = (function () {
+    return {
+      /**
+       * @param {IndexItem[]} [data]
+       */
+      show: function (data) {
+        if (data) {
+          const targets = data.map(function (item) {
+            return item.notation_md5;
+          });
+
+          $items.each(function (idx, item) {
+            const md5 = $(item).data('tms-item-md5');
+            if (targets.indexOf(md5) >= 0) {
+              $(item).show();
+            } else {
+              $(item).hide();
+            }
+          });
+          uiControl.updateItemCount(data.length);
+        } else {
+          $items.show();
+          uiControl.updateItemCount();
+        }
+      },
+    };
+  })();
 });
