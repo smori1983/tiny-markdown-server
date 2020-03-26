@@ -37,6 +37,58 @@ $(function () {
     };
   })();
 
+  const $items = $('.tms-item');
+
+  const itemControl = (function () {
+    return {
+      /**
+       * @param {IndexItem[]} [data]
+       */
+      show: function (data) {
+        if (data) {
+          const targets = data.map(function (item) {
+            return item.notation_md5;
+          });
+
+          $items.each(function (idx, item) {
+            const md5 = $(item).data('tms-item-md5');
+            if (targets.indexOf(md5) >= 0) {
+              $(item).show();
+            } else {
+              $(item).hide();
+            }
+          });
+          uiControl.updateItemCount(data.length);
+        } else {
+          $items.show();
+          uiControl.updateItemCount();
+        }
+      },
+    };
+  })();
+
+  /**
+   * @typedef {Object} FormActionStructure
+   * @property {function} before
+   * @property {FormActionMain} main
+   * @property {function} after
+   */
+
+  /**
+   * @callback FormActionMain
+   * @param {function} next
+   */
+
+  /**
+   * @param {FormActionStructure} structure
+   */
+  const formAction = function (structure) {
+    structure.before();
+    structure.main(function () {
+      structure.after();
+    });
+  };
+
   const $form = $('#tms-search');
 
   $form.on('submit', function (e) {
@@ -53,8 +105,6 @@ $(function () {
       search(word);
     }
   });
-
-  const $items = $('.tms-item');
 
   const reset = function () {
     formAction({
@@ -101,54 +151,4 @@ $(function () {
       },
     });
   };
-
-  const itemControl = (function () {
-    return {
-      /**
-       * @param {IndexItem[]} [data]
-       */
-      show: function (data) {
-        if (data) {
-          const targets = data.map(function (item) {
-            return item.notation_md5;
-          });
-
-          $items.each(function (idx, item) {
-            const md5 = $(item).data('tms-item-md5');
-            if (targets.indexOf(md5) >= 0) {
-              $(item).show();
-            } else {
-              $(item).hide();
-            }
-          });
-          uiControl.updateItemCount(data.length);
-        } else {
-          $items.show();
-          uiControl.updateItemCount();
-        }
-      },
-    };
-  })();
-
-  /**
-   * @param {FormActionStructure} structure
-   */
-  const formAction = function (structure) {
-    structure.before();
-    structure.main(function () {
-      structure.after();
-    });
-  }
 });
-
-/**
- * @typedef {Object} FormActionStructure
- * @property {function} before
- * @property {FormActionMain} main
- * @property {function} after
- */
-
-/**
- * @callback FormActionMain
- * @param {function} next
- */
