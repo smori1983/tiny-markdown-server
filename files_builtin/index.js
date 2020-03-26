@@ -102,15 +102,6 @@ $(function () {
     });
   };
 
-  /**
-   * @param {IndexItem[]} data
-   */
-  const render = function (data) {
-    itemControl.show(data);
-    uiControl.endSearch();
-    formControl.unlock();
-  };
-
   const itemControl = (function () {
     return {
       /**
