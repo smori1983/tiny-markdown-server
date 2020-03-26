@@ -57,27 +57,48 @@ $(function () {
   const $items = $('.tms-item');
 
   const reset = function () {
-    formControl.lock();
-    uiControl.beginSearch();
-    itemControl.show();
-    uiControl.endSearch();
-    formControl.unlock();
+    formAction({
+      before: function () {
+        formControl.lock();
+        uiControl.beginSearch();
+      },
+      main: function (next) {
+        itemControl.show();
+        next();
+      },
+      after: function () {
+        uiControl.endSearch();
+        formControl.unlock();
+      },
+    });
   };
 
   /**
    * @param {string} word
    */
   const search = function (word) {
-    formControl.lock();
-    uiControl.beginSearch();
-
-    $.ajax({
-      url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
-      data: {
-        word: word,
+    formAction({
+      before: function () {
+        formControl.lock();
+        uiControl.beginSearch();
       },
-      dataType: 'json',
-      success: render,
+      main: function (next) {
+        $.ajax({
+          url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
+          data: {
+            word: word,
+          },
+          dataType: 'json',
+          success: function (data) {
+            itemControl.show(data);
+            next();
+          }
+        });
+      },
+      after: function () {
+        uiControl.endSearch();
+        formControl.unlock();
+      },
     });
   };
 
@@ -117,4 +138,26 @@ $(function () {
       },
     };
   })();
+
+  /**
+   * @param {FormActionStructure} structure
+   */
+  const formAction = function (structure) {
+    structure.before();
+    structure.main(function () {
+      structure.after();
+    });
+  }
 });
+
+/**
+ * @typedef {Object} FormActionStructure
+ * @property {function} before
+ * @property {FormActionMain} main
+ * @property {function} after
+ */
+
+/**
+ * @callback FormActionMain
+ * @param {function} next
+ */
