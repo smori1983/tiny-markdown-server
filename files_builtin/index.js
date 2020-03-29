@@ -17,7 +17,7 @@ $(function () {
 
   const uiControl = (function () {
     return {
-      startSearch: function () {
+      beginSearch: function () {
         $('#tms-search-spinner').removeClass('d-none');
       },
       endSearch: function () {
@@ -65,7 +65,7 @@ $(function () {
    * @param {string} word
    */
   const search = function (word) {
-    uiControl.startSearch();
+    uiControl.beginSearch();
 
     $.ajax({
       url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
