@@ -16,18 +16,21 @@ $(function () {
   })();
 
   const uiControl = (function () {
+    const $spinner = $('#tms-search-spinner');
+    const totalCount = $('#tms-items-total').text();
+
     return {
       beginSearch: function () {
-        $('#tms-search-spinner').removeClass('d-none');
+        $spinner.removeClass('d-none');
       },
       endSearch: function () {
-        $('#tms-search-spinner').addClass('d-none');
+        $spinner.addClass('d-none');
       },
       /**
        * @param {number} [value]
        */
       updateItemCount: function (value) {
-        const current = (typeof value === 'number') ? value : $('#tms-items-total').text();
+        const current = (typeof value === 'number') ? value : totalCount;
 
         $('#tms-items-current').text(current);
       },
