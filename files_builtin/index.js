@@ -68,21 +68,21 @@ $(function () {
   })();
 
   /**
-   * @typedef {Object} FormActionStructure
+   * @typedef {Object} FormProcessStructure
    * @property {function} before
-   * @property {FormActionMain} main
+   * @property {FormProcessMain} main
    * @property {function} after
    */
 
   /**
-   * @callback FormActionMain
+   * @callback FormProcessMain
    * @param {function} next
    */
 
   /**
-   * @param {FormActionStructure} structure
+   * @param {FormProcessStructure} structure
    */
-  const formAction = function (structure) {
+  const formProcess = function (structure) {
     structure.before();
     structure.main(function () {
       structure.after();
@@ -107,7 +107,7 @@ $(function () {
   });
 
   const reset = function () {
-    formAction({
+    formProcess({
       before: function () {
         formControl.lock();
         uiControl.beginSearch();
@@ -127,7 +127,7 @@ $(function () {
    * @param {string} word
    */
   const search = function (word) {
-    formAction({
+    formProcess({
       before: function () {
         formControl.lock();
         uiControl.beginSearch();
