@@ -37,6 +37,58 @@ $(function () {
     };
   })();
 
+  const $items = $('.tms-item');
+
+  const itemControl = (function () {
+    return {
+      /**
+       * @param {IndexItem[]} [data]
+       */
+      show: function (data) {
+        if (data) {
+          const targets = data.map(function (item) {
+            return item.notation_md5;
+          });
+
+          $items.each(function (idx, item) {
+            const md5 = $(item).data('tms-item-md5');
+            if (targets.indexOf(md5) >= 0) {
+              $(item).show();
+            } else {
+              $(item).hide();
+            }
+          });
+          uiControl.updateItemCount(data.length);
+        } else {
+          $items.show();
+          uiControl.updateItemCount();
+        }
+      },
+    };
+  })();
+
+  /**
+   * @typedef {Object} FormProcessStructure
+   * @property {function} before
+   * @property {FormProcessMain} main
+   * @property {function} after
+   */
+
+  /**
+   * @callback FormProcessMain
+   * @param {function} next
+   */
+
+  /**
+   * @param {FormProcessStructure} structure
+   */
+  const formProcess = function (structure) {
+    structure.before();
+    structure.main(function () {
+      structure.after();
+    });
+  };
+
   const $form = $('#tms-search');
 
   $form.on('submit', function (e) {
@@ -46,8 +98,6 @@ $(function () {
       return;
     }
 
-    formControl.lock();
-
     const word = $(this).find('input[name=word]').val();
     if (word.length === 0) {
       reset();
@@ -56,49 +106,49 @@ $(function () {
     }
   });
 
-  const $items = $('.tms-item');
-
   const reset = function () {
-    $items.show();
-    uiControl.updateItemCount();
-    formControl.unlock();
+    formProcess({
+      before: function () {
+        formControl.lock();
+        uiControl.beginSearch();
+      },
+      main: function (next) {
+        itemControl.show();
+        next();
+      },
+      after: function () {
+        uiControl.endSearch();
+        formControl.unlock();
+      },
+    });
   };
 
   /**
    * @param {string} word
    */
   const search = function (word) {
-    uiControl.beginSearch();
-
-    $.ajax({
-      url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
-      data: {
-        word: word,
+    formProcess({
+      before: function () {
+        formControl.lock();
+        uiControl.beginSearch();
       },
-      dataType: 'json',
-      success: render,
+      main: function (next) {
+        $.ajax({
+          url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
+          data: {
+            word: word,
+          },
+          dataType: 'json',
+          success: function (data) {
+            itemControl.show(data);
+            next();
+          },
+        });
+      },
+      after: function () {
+        uiControl.endSearch();
+        formControl.unlock();
+      },
     });
-  };
-
-  /**
-   * @param {IndexItem[]} data
-   */
-  const render = function (data) {
-    const targets = data.map(function (item) {
-      return item.notation_md5;
-    });
-
-    $items.each(function (idx, item) {
-      const md5 = $(item).data('tms-item-md5');
-      if (targets.indexOf(md5) >= 0) {
-        $(item).show();
-      } else {
-        $(item).hide();
-      }
-    });
-
-    uiControl.updateItemCount(data.length);
-    uiControl.endSearch();
-    formControl.unlock();
   };
 });
