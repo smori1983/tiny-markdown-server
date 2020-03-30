@@ -142,7 +142,7 @@ $(function () {
           success: function (data) {
             itemControl.show(data);
             next();
-          }
+          },
         });
       },
       after: function () {
