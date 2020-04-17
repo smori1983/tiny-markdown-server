@@ -67,10 +67,13 @@ describe('middleware.search', function () {
     assert.strictEqual(next.notCalled, true);
   });
 
-  it('should handle multiple words', function () {
+  given(
+    'file 01',
+    '01 Hello',
+  ).it('should handle multiple words', function (word) {
     const dir = __dirname + '/../../test_resource/search_01';
 
-    const req = {method: 'GET', query: {word: 'file 01'}};
+    const req = {method: 'GET', query: {word: word}};
     const res = {json: sinon.spy()};
     const next = sinon.spy();
 
