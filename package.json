@@ -36,6 +36,7 @@
     "watch": "^1.0.2"
   },
   "scripts": {
+    "license": "node build_scripts/license.js",
     "test": "mocha test/*",
     "test:coverage": "istanbul cover --print both _mocha -- test/*",
     "watch:test": "watch 'npm run test' app/ lib/ test/ --interval=1 --ignoreDotFiles",
