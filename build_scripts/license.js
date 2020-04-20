@@ -20,6 +20,10 @@ licenseChecker.init(args, function(err, json) {
   outputLines.push('');
 
   packageAndVersions.forEach(function(packageAndVersion) {
+    if (/^tiny-markdown-server/.test(packageAndVersion)) {
+      return;
+    }
+
     const licenseFile = json[packageAndVersion].licenseFile;
 
     outputLines.push(packageAndVersion + ' BEGIN HERE');
