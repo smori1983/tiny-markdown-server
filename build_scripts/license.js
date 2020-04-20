@@ -27,9 +27,9 @@ licenseChecker.init(args, function(err, json) {
     const licenseFile = json[packageAndVersion].licenseFile;
 
     outputLines.push(packageAndVersion + ' BEGIN HERE');
-    outputLines.push('--------------------------------------------------');
+    outputLines.push('================================================================================');
     outputLines.push(fs.readFileSync(licenseFile).toString());
-    outputLines.push('--------------------------------------------------');
+    outputLines.push('================================================================================');
     outputLines.push(packageAndVersion + ' END');
     outputLines.push('');
   });
