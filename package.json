@@ -29,12 +29,15 @@
     "electron-builder": "^22.4.1",
     "eslint": "^6.8.0",
     "istanbul": "^0.4.5",
+    "license-checker": "^25.0.1",
     "mocha": "^7.1.1",
     "mocha-testdata": "^1.2.0",
     "sinon": "^9.0.2",
     "watch": "^1.0.2"
   },
   "scripts": {
+    "license:summary": "license-checker --production --summary --unknown",
+    "license:generate": "node build_scripts/license.js",
     "test": "mocha test/*",
     "test:coverage": "istanbul cover --print both _mocha -- test/*",
     "watch:test": "watch 'npm run test' app/ lib/ test/ --interval=1 --ignoreDotFiles",
