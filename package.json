@@ -9,7 +9,7 @@
     "ejs-electron": "^2.0.3",
     "express": "^4.17.1",
     "github-markdown-css": "^3.0.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsonschema": "^1.2.5",
     "markdown-it": "^8.4.2",
     "n-readlines": "^1.0.0",
