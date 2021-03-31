@@ -23,6 +23,9 @@ app.on('ready', function() {
   ejsElectron.data('version', packageJson.version);
 
   mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+    },
     width: 800,
     height: 600,
   });
