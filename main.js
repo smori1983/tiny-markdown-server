@@ -25,6 +25,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
     width: 800,
     height: 600,
