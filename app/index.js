@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('directory_select').addEventListener('click', function() {
     dialog.showOpenDialog({
       properties: ['openDirectory'],
-    }, function(path) {
-      document.getElementById('directory').value = path[0];
+    }).then((result) => {
+      document.getElementById('directory').value = result.filePaths[0];
     });
   });
 
