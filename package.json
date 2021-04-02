@@ -14,20 +14,20 @@
     "build:win": "node build_scripts/build-win.js"
   },
   "dependencies": {
-    "bootstrap": "^4.4.1",
-    "ejs": "^3.1.2",
-    "ejs-electron": "^2.0.3",
+    "bootstrap": "^4.6.0",
+    "ejs": "^3.1.6",
+    "ejs-electron": "^2.1.1",
     "escape-string-regexp": "^4.0.0",
     "express": "^4.17.1",
     "github-markdown-css": "^4.0.0",
-    "jquery": "^3.5.1",
-    "jsonschema": "^1.2.6",
+    "jquery": "^3.6.0",
+    "jsonschema": "^1.4.0",
     "markdown-it": "^10.0.0",
-    "md5": "^2.2.1",
-    "n-readlines": "^1.0.0",
+    "md5": "^2.3.0",
+    "n-readlines": "^1.0.1",
     "popper.js": "^1.16.1",
     "sprintf-js": "^1.1.2",
-    "yargs": "^15.3.1"
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/buffers": "^0.1.31",
