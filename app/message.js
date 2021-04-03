@@ -1,26 +1,26 @@
 /**
  * @param {string} elementId
  */
-const message = function(elementId) {
+const message = (elementId) => {
   let timeoutId = null;
 
   /**
    * @param {string} value
    */
-  const show = function(value) {
+  const show = (value) => {
     document.getElementById(elementId).innerHTML = value;
 
     if (timeoutId !== null) {
       window.clearTimeout(timeoutId);
     }
 
-    timeoutId = window.setTimeout(function() {
+    timeoutId = window.setTimeout(() => {
       timeoutId = null;
       hide();
     }, 3000);
   };
 
-  const hide = function() {
+  const hide = () => {
     document.getElementById(elementId).innerHTML = '';
   };
 

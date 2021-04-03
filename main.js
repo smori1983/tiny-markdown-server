@@ -13,11 +13,11 @@ let mainWindow;
 /** @type {module:http.Server} */
 let server;
 
-app.on('window-all-closed', function() {
+app.on('window-all-closed', () => {
   app.quit();
 });
 
-app.on('ready', function() {
+app.on('ready', () => {
   const packageJson = require(__dirname + '/package.json');
 
   ejsElectron.data('version', packageJson.version);
@@ -32,12 +32,12 @@ app.on('ready', function() {
   });
   mainWindow.loadURL('file://' + __dirname + '/app/index.ejs');
 
-  mainWindow.on('closed', function() {
+  mainWindow.on('closed', () => {
     mainWindow = null;
   });
 });
 
-ipcMain.on('server-start', function(event, args) {
+ipcMain.on('server-start', (event, args) => {
   const mds = require('./lib/markdownServer');
 
   if (server) {
@@ -49,7 +49,7 @@ ipcMain.on('server-start', function(event, args) {
   event.sender.send('server-started');
 });
 
-ipcMain.on('server-stop', function(event) {
+ipcMain.on('server-stop', (event) => {
   if (server && server.listening) {
     server.close();
     event.sender.send('server-stopped');
