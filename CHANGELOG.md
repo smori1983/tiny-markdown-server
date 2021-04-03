@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Next (v2.0.0)
+
+### Feature
+
+- Fulltext search form in top page (#6)
+
 ## v1.1.0
 
 ### Feature

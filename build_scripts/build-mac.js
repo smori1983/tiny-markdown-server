@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const builder = require('electron-builder');
 const Platform = builder.Platform;

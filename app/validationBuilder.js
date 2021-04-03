@@ -1,5 +1,3 @@
-'use strict';
-
 const Validator = require('jsonschema').Validator;
 
 /**

@@ -1,14 +1,28 @@
 # LOG
 
+## jquery
+
+version: `3.6.0`
+
+```
+npm install jquery
+
+mkdir -p files_builtin/jquery
+cp node_modules/jquery/dist/jquery.min.js files_builtin/jquery/
+```
+
 ## bootstrap
 
-version: `4.4.1`
+version: `4.6.0`
 
 ```
 npm install bootstrap
 
 mkdir -p files_builtin/bootstrap
 cp -r node_modules/bootstrap/dist/* files_builtin/bootstrap/
+
+mkdir -p app/bootstrap
+cp -r node_modules/bootstrap/dist/* app/bootstrap/
 ```
 
 ## `github-markdown.css`
