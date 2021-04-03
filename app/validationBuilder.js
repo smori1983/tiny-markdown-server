@@ -3,7 +3,7 @@ const Validator = require('jsonschema').Validator;
 /**
  * @param {object} fields
  */
-const build = function(fields) {
+const build = (fields) => {
   const validator = new Validator();
 
   const schema = {
@@ -16,7 +16,7 @@ const build = function(fields) {
    * @param {string} name
    * @param {customFormatter} func
    */
-  const addFormat = function(name, func) {
+  const addFormat = (name, func) => {
     validator.customFormats[name] = func;
   };
 
@@ -24,12 +24,12 @@ const build = function(fields) {
    * @param {object} data
    * @returns {validationResult}
    */
-  const execute = function(data) {
+  const execute = (data) => {
     const result = validator.validate(data, schema);
 
     let errors = [];
 
-    result.errors.forEach(function (error) {
+    result.errors.forEach((error) => {
       // propertyPath may be 'instance'.
       // property will be 'instance.directory' etc.
       errors.push(error.property.slice(result.propertyPath.length + 1));

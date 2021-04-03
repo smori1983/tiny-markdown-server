@@ -4,10 +4,10 @@ const {dialog} = require('electron').remote;
 const message = require('./message');
 const validation = require('./validation');
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   const serverStatus = message('server-status');
 
-  document.getElementById('directory_select').addEventListener('click', function() {
+  document.getElementById('directory_select').addEventListener('click', () => {
     dialog.showOpenDialog({
       properties: ['openDirectory'],
     }).then((result) => {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  document.getElementById('start').addEventListener('click', function () {
+  document.getElementById('start').addEventListener('click', () => {
     const directory = document.getElementById('directory').value;
     const port = document.getElementById('port').value;
 
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     serverStatus.hide();
 
-    document.querySelectorAll('.user-input').forEach(function (element) {
+    document.querySelectorAll('.user-input').forEach((element) => {
       element.classList.remove('is-invalid');
     });
 
@@ -36,21 +36,21 @@ document.addEventListener('DOMContentLoaded', function() {
         port: port,
       });
     } else {
-      result.errors.forEach(function(id) {
+      result.errors.forEach((id) => {
         document.getElementById(id).classList.add('is-invalid');
       });
     }
   });
 
-  document.getElementById('stop').addEventListener('click', function () {
+  document.getElementById('stop').addEventListener('click', () => {
     ipcRenderer.send('server-stop');
   });
 
-  ipcRenderer.on('server-started', function() {
+  ipcRenderer.on('server-started', () => {
     serverStatus.show('server started.');
   });
 
-  ipcRenderer.on('server-stopped', function() {
+  ipcRenderer.on('server-stopped', () => {
     serverStatus.show('server stopped.');
   });
 });

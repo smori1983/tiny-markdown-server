@@ -5,7 +5,7 @@ const builder = require('./validationBuilder');
  * @param {string} input
  * @returns {boolean}
  */
-const isDir = function (input) {
+const isDir = (input) => {
   try {
     return input.length > 0 && fs.statSync(input).isDirectory();
   } catch (e) {
@@ -17,7 +17,7 @@ const isDir = function (input) {
  * @param {string} input
  * @returns {boolean}
  */
-const isPort = function (input) {
+const isPort = (input) => {
   return (/^\d+$/.test(input)) && (80 <= input && input <= 65535);
 };
 
@@ -25,7 +25,7 @@ const isPort = function (input) {
  * @param {object} data
  * @returns {validationResult}
  */
-const execute = function(data) {
+const execute = (data) => {
   const validation = builder.build({
     'directory': {
       'type': 'string',

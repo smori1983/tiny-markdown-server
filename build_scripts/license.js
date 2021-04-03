@@ -10,7 +10,7 @@ const args = {
   start: path.resolve(__dirname + '/..'),
 };
 
-licenseChecker.init(args, function(err, json) {
+licenseChecker.init(args, (err, json) => {
   const packageAndVersions = Object.keys(json);
 
   outputLines.push('tiny-markdown-server');
@@ -19,7 +19,7 @@ licenseChecker.init(args, function(err, json) {
   outputLines.push('');
   outputLines.push('');
 
-  packageAndVersions.forEach(function(packageAndVersion) {
+  packageAndVersions.forEach((packageAndVersion) => {
     if (/^tiny-markdown-server/.test(packageAndVersion)) {
       return;
     }
