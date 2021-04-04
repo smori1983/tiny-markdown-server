@@ -1,35 +1,35 @@
 $(function () {
-  const formControl = (function () {
+  const formControl = (() => {
     let locked = false;
 
     return {
-      lock: function () {
+      lock: () => {
         locked = true;
       },
-      locking: function () {
+      locking: () => {
         return locked === true;
       },
-      unlock: function () {
+      unlock: () => {
         locked = false;
       },
     };
   })();
 
-  const uiControl = (function () {
+  const uiControl = (() => {
     const $spinner = $('#tms-search-spinner');
     const totalCount = $('#tms-items-total').text();
 
     return {
-      beginSearch: function () {
+      beginSearch: () => {
         $spinner.removeClass('d-none');
       },
-      endSearch: function () {
+      endSearch: () => {
         $spinner.addClass('d-none');
       },
       /**
        * @param {number} [value]
        */
-      updateItemCount: function (value) {
+      updateItemCount: (value) => {
         const current = (typeof value === 'number') ? value : totalCount;
 
         $('#tms-items-current').text(current);
@@ -39,18 +39,18 @@ $(function () {
 
   const $items = $('.tms-item');
 
-  const itemControl = (function () {
+  const itemControl = (() => {
     return {
       /**
        * @param {IndexItem[]} [data]
        */
-      show: function (data) {
+      show: (data) => {
         if (data) {
-          const targets = data.map(function (item) {
+          const targets = data.map((item) => {
             return item.notation_md5;
           });
 
-          $items.each(function (idx, item) {
+          $items.each((idx, item) => {
             const md5 = $(item).data('tms-item-md5');
             if (targets.indexOf(md5) >= 0) {
               $(item).show();
@@ -82,16 +82,16 @@ $(function () {
   /**
    * @param {FormProcessStructure} structure
    */
-  const formProcess = function (structure) {
+  const formProcess = (structure) => {
     structure.before();
-    structure.main(function () {
+    structure.main(() => {
       structure.after();
     });
   };
 
   const $form = $('#tms-search');
 
-  $form.on('submit', function (e) {
+  $form.on('submit', (e) => {
     e.preventDefault();
 
     if (formControl.locking()) {
@@ -106,17 +106,17 @@ $(function () {
     }
   });
 
-  const reset = function () {
+  const reset = () => {
     formProcess({
-      before: function () {
+      before: () => {
         formControl.lock();
         uiControl.beginSearch();
       },
-      main: function (next) {
+      main: (next) => {
         itemControl.show();
         next();
       },
-      after: function () {
+      after: () => {
         uiControl.endSearch();
         formControl.unlock();
       },
@@ -126,26 +126,26 @@ $(function () {
   /**
    * @param {string} word
    */
-  const search = function (word) {
+  const search = (word) => {
     formProcess({
-      before: function () {
+      before: () => {
         formControl.lock();
         uiControl.beginSearch();
       },
-      main: function (next) {
+      main: (next) => {
         $.ajax({
           url: $('meta[name=APP_PATH_SEARCH]').attr('content'),
           data: {
             word: word,
           },
           dataType: 'json',
-          success: function (data) {
+          success: (data) => {
             itemControl.show(data);
             next();
           },
         });
       },
-      after: function () {
+      after: () => {
         uiControl.endSearch();
         formControl.unlock();
       },
