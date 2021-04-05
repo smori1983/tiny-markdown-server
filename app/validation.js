@@ -1,5 +1,5 @@
 const fs = require('fs');
-const builder = require('./validationBuilder');
+const ValidationBuilder = require('./validationBuilder');
 
 /**
  * @param {string} input
@@ -26,7 +26,7 @@ const isPort = (input) => {
  * @returns {validationResult}
  */
 const execute = (data) => {
-  const validation = builder.build({
+  const validation = new ValidationBuilder({
     'directory': {
       'type': 'string',
       'required': true,

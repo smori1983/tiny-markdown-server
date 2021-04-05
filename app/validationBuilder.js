@@ -1,31 +1,33 @@
 const Validator = require('jsonschema').Validator;
 
-/**
- * @param {object} fields
- */
-const build = (fields) => {
-  const validator = new Validator();
+class ValidationBuilder {
+  /**
+   * @param {object} fields
+   */
+  constructor(fields) {
+    this._validator = new Validator();
 
-  const schema = {
-    'type': 'object',
-    'properties': fields,
-    'additionalProperties': false,
-  };
+    this._schema = {
+      'type': 'object',
+      'properties': fields,
+      'additionalProperties': false,
+    };
+  }
 
   /**
    * @param {string} name
    * @param {customFormatter} func
    */
-  const addFormat = (name, func) => {
-    validator.customFormats[name] = func;
-  };
+  addFormat(name, func) {
+    this._validator.customFormats[name] = func;
+  }
 
   /**
    * @param {object} data
    * @returns {validationResult}
    */
-  const execute = (data) => {
-    const result = validator.validate(data, schema);
+  execute(data) {
+    const result = this._validator.validate(data, this._schema);
 
     let errors = [];
 
@@ -39,15 +41,10 @@ const build = (fields) => {
       isValid: result.valid,
       errors: errors,
     };
-  };
+  }
+}
 
-  return {
-    addFormat: addFormat,
-    execute: execute,
-  };
-};
-
-module.exports.build = build;
+module.exports = ValidationBuilder;
 
 /**
  * @callback customFormatter
