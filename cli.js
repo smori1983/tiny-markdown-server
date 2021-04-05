@@ -8,7 +8,7 @@ const mds = require('./lib/markdownServer');
 yargs.command({
   command: ['serve <directory> <port>', '$0'],
   desc: 'Run markdown server',
-  builder: function(yargs) {
+  builder: (yargs) => {
     yargs.positional('directory', {
       describe: 'The directory to be served',
       type: 'string',
@@ -22,8 +22,8 @@ yargs.command({
       type: 'boolean',
     });
   },
-  handler: function (argv) {
-    mds.serve(argv.directory, argv.port, function (server) {
+  handler: (argv) => {
+    mds.serve(argv.directory, argv.port, (server) => {
       if (argv.autoDeploy === true) {
         /** @type {module:net.AddressInfo} */
         const addressInfo = server.address();
