@@ -1,33 +1,32 @@
-/**
- * @param {string} elementId
- */
-const message = (elementId) => {
-  let timeoutId = null;
+class Message {
+  /**
+   * @param {string} elementId
+   */
+  constructor(elementId) {
+    this._elementId = elementId;
+
+    this._timeoutId = null;
+  }
 
   /**
    * @param {string} value
    */
-  const show = (value) => {
-    document.getElementById(elementId).innerHTML = value;
+  show (value) {
+    document.getElementById(this._elementId).innerHTML = value;
 
-    if (timeoutId !== null) {
-      window.clearTimeout(timeoutId);
+    if (this._timeoutId !== null) {
+      window.clearTimeout(this._timeoutId);
     }
 
-    timeoutId = window.setTimeout(() => {
-      timeoutId = null;
-      hide();
+    this._timeoutId = window.setTimeout(() => {
+      this._timeoutId = null;
+      this.hide();
     }, 3000);
-  };
+  }
 
-  const hide = () => {
-    document.getElementById(elementId).innerHTML = '';
-  };
+  hide() {
+    document.getElementById(this._elementId).innerHTML = '';
+  }
+}
 
-  return {
-    show: show,
-    hide: hide,
-  };
-};
-
-module.exports = message;
+module.exports = Message;
