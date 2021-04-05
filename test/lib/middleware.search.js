@@ -4,8 +4,8 @@ const assert = require('assert');
 const sinon = require('sinon');
 const SUT = require('../../lib/middleware.search');
 
-describe('middleware.search', function () {
-  it('should do nothing if request is not GET', function () {
+describe('middleware.search', () => {
+  it('should do nothing if request is not GET', () => {
     const req = {method: 'POST'};
     const res = {json: sinon.spy()};
     const next = sinon.spy();
@@ -16,7 +16,7 @@ describe('middleware.search', function () {
     assert.strictEqual(next.calledOnce, true);
   });
 
-  it('should handle the request without query parameter', function () {
+  it('should handle the request without query parameter', () => {
     const dir = __dirname + '/../../test_resource/search_01';
 
     const req = {method: 'GET', query: {}};
@@ -31,7 +31,7 @@ describe('middleware.search', function () {
     assert.strictEqual(json.length, 0);
   });
 
-  it('should not response any result for empty query', function () {
+  it('should not response any result for empty query', () => {
     const dir = __dirname + '/../../test_resource/search_01';
 
     const req = {method: 'GET', query: {word: ''}};
@@ -50,7 +50,7 @@ describe('middleware.search', function () {
     'HELLO',
     'Hello',
     'hello',
-  ).it('should match as case-insensitive', function (word) {
+  ).it('should match as case-insensitive', (word) => {
     const dir = __dirname + '/../../test_resource/search_01';
 
     const req = {method: 'GET', query: {word: word}};
@@ -70,7 +70,7 @@ describe('middleware.search', function () {
   given(
     'file 01',
     '01 Hello',
-  ).it('should handle multiple words', function (word) {
+  ).it('should handle multiple words', (word) => {
     const dir = __dirname + '/../../test_resource/search_01';
 
     const req = {method: 'GET', query: {word: word}};

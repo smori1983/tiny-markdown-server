@@ -4,8 +4,8 @@ const sinon = require('sinon');
 const indexUtil = require('../../lib/indexUtil');
 const SUT = require('../../lib/middleware.index');
 
-describe('middleware.index', function () {
-  it('should render using indexUtil', function () {
+describe('middleware.index', () => {
+  it('should render using indexUtil', () => {
     const scan = sinon.stub(indexUtil, 'scanMarkdownFiles');
     scan
       .withArgs('/path/to/dir')

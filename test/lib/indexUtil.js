@@ -2,10 +2,10 @@ const { describe, it } = require('mocha');
 const assert = require('assert');
 const SUT = require('../../lib/indexUtil');
 
-describe('lib.indexUtil', function () {
-  describe('scanMarkdownFiles', function () {
-    describe('ignored directories', function () {
-      it('should ignore DOT directory', function () {
+describe('lib.indexUtil', () => {
+  describe('scanMarkdownFiles', () => {
+    describe('ignored directories', () => {
+      it('should ignore DOT directory', () => {
         const dir = __dirname + '/../../test_resource/ignore_01';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -16,8 +16,8 @@ describe('lib.indexUtil', function () {
       });
     });
 
-    describe('file extension', function () {
-      it('.md - 1 file found', function () {
+    describe('file extension', () => {
+      it('.md - 1 file found', () => {
         const dir = __dirname + '/../../test_resource/dir_01';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -27,7 +27,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[0].notation, 'file_01.md');
       });
 
-      it('.md - 2 files found', function () {
+      it('.md - 2 files found', () => {
         const dir = __dirname + '/../../test_resource/dir_02';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -39,7 +39,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[1].notation, 'file_03.md');
       });
 
-      it('.markdown - 1 file found', function () {
+      it('.markdown - 1 file found', () => {
         const dir = __dirname + '/../../test_resource/dir_03';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -49,7 +49,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[0].notation, 'file_02.markdown');
       });
 
-      it('has directory - 4 files found', function () {
+      it('has directory - 4 files found', () => {
         const dir = __dirname + '/../../test_resource/dir_04';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -66,8 +66,8 @@ describe('lib.indexUtil', function () {
       });
     });
 
-    describe('encode', function () {
-      it('# should be encoded to %23', function () {
+    describe('encode', () => {
+      it('# should be encoded to %23', () => {
         const dir = __dirname + '/../../test_resource/dir_05';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -79,7 +79,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[1].notation, 'file#01.md');
       });
 
-      it('+ should be encoded to %2B', function () {
+      it('+ should be encoded to %2B', () => {
         const dir = __dirname + '/../../test_resource/dir_06';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -91,7 +91,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[1].notation, 'file+01.md');
       });
 
-      it('? should be encoded to %3F', function () {
+      it('? should be encoded to %3F', () => {
         const dir = __dirname + '/../../test_resource/dir_07';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -104,8 +104,8 @@ describe('lib.indexUtil', function () {
       });
     });
 
-    describe('title', function () {
-      it('should find #', function () {
+    describe('title', () => {
+      it('should find #', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -113,7 +113,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[0].title, 'file_01');
       });
 
-      it('should find ##', function () {
+      it('should find ##', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -121,7 +121,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[1].title, 'file_02');
       });
 
-      it('should find ###', function () {
+      it('should find ###', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -129,7 +129,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[2].title, 'file_03');
       });
 
-      it('should find ######', function () {
+      it('should find ######', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -137,7 +137,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[3].title, 'file_04');
       });
 
-      it('should not find any header line - no header lines', function () {
+      it('should not find any header line - no header lines', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -145,7 +145,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[4].title, 'file_05.md');
       });
 
-      it('should not find any header line - no space after hash character', function () {
+      it('should not find any header line - no space after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -153,7 +153,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[5].title, 'file_06.md');
       });
 
-      it('should find # - 3 spaces after hash character', function () {
+      it('should find # - 3 spaces after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);
@@ -161,7 +161,7 @@ describe('lib.indexUtil', function () {
         assert.strictEqual(result[6].title, 'file_07');
       });
 
-      it('should not find any header line - 4 spaces after hash character', function () {
+      it('should not find any header line - 4 spaces after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = SUT.scanMarkdownFiles(dir);

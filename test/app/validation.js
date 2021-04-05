@@ -4,9 +4,9 @@ const Validation = require('../../app/validation');
 
 const SUT = new Validation();
 
-describe('app.validation', function () {
-  describe('valid pattern', function () {
-    it('80 is valid for port', function () {
+describe('app.validation', () => {
+  describe('valid pattern', () => {
+    it('80 is valid for port', () => {
       const data = {
         directory: __dirname,
         port: '80',
@@ -15,7 +15,7 @@ describe('app.validation', function () {
       assert.strictEqual(SUT.execute(data).isValid, true);
     });
 
-    it('65535 is valid for port', function () {
+    it('65535 is valid for port', () => {
       const data = {
         directory: __dirname,
         port: '65535',
@@ -25,8 +25,8 @@ describe('app.validation', function () {
     });
   });
 
-  describe('invalid pattern', function () {
-    it('lacks directory', function () {
+  describe('invalid pattern', () => {
+    it('lacks directory', () => {
       const data = {
         port: '80',
       };
@@ -34,7 +34,7 @@ describe('app.validation', function () {
       assert.strictEqual(SUT.execute(data).isValid, false);
     });
 
-    it('lacks port', function () {
+    it('lacks port', () => {
       const data = {
         directory: __dirname,
       };
@@ -45,7 +45,7 @@ describe('app.validation', function () {
       assert.deepStrictEqual(result.errors, ['port']);
     });
 
-    it('directory does not exist', function () {
+    it('directory does not exist', () => {
       const data = {
         directory: '/foo/bar',
         port: '80',
@@ -57,7 +57,7 @@ describe('app.validation', function () {
       assert.deepStrictEqual(result.errors, ['directory']);
     });
 
-    it('79 is invalid for port', function () {
+    it('79 is invalid for port', () => {
       const data = {
         directory: __dirname,
         port: '79',
@@ -69,7 +69,7 @@ describe('app.validation', function () {
       assert.deepStrictEqual(result.errors, ['port']);
     });
 
-    it('65536 is invalid for port', function () {
+    it('65536 is invalid for port', () => {
       const data = {
         directory: __dirname,
         port: '65536',
@@ -81,7 +81,7 @@ describe('app.validation', function () {
       assert.deepStrictEqual(result.errors, ['port']);
     });
 
-    it('unknown property is rejected', function () {
+    it('unknown property is rejected', () => {
       const data = {
         directory: __dirname,
         port: '80',
