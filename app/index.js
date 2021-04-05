@@ -1,11 +1,11 @@
 const {ipcRenderer} = require('electron');
 const {dialog} = require('electron').remote;
 
-const message = require('./message');
-const validation = require('./validation');
+const Message = require('./message');
+const Validation = require('./validation');
 
 document.addEventListener('DOMContentLoaded', () => {
-  const serverStatus = message('server-status');
+  const serverStatus = new Message('server-status');
 
   document.getElementById('directory_select').addEventListener('click', () => {
     dialog.showOpenDialog({
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('start').addEventListener('click', () => {
+    const validation = new Validation();
     const directory = document.getElementById('directory').value;
     const port = document.getElementById('port').value;
 

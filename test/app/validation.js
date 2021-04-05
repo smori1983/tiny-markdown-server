@@ -1,6 +1,8 @@
 const { describe, it } = require('mocha');
 const assert = require('assert');
-const SUT = require('../../app/validation');
+const Validation = require('../../app/validation');
+
+const SUT = new Validation();
 
 describe('app.validation', function () {
   describe('valid pattern', function () {
