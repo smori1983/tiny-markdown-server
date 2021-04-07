@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const licenseChecker = require('license-checker');
 
-const packageJson = require('./../package.json');
+const packageJsonPath = path.resolve(__dirname + '/../package.json');
+const packageJson = require(packageJsonPath);
 
 const outputFile = path.resolve(__dirname + '/../LICENSE.third_party.txt');
 const outputLines = [];
@@ -10,7 +11,7 @@ const outputLines = [];
 const args = {
   excludePackages: packageJson.name + '@' + packageJson.version,
   production: true,
-  start: path.resolve(__dirname + '/..'),
+  start: path.dirname(packageJsonPath),
 };
 
 licenseChecker.init(args, (err, json) => {
