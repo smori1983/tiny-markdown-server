@@ -7,7 +7,7 @@
     "license:generate": "node build_scripts/license.js",
     "test": "mocha test/*",
     "test:coverage": "istanbul cover --print both _mocha -- test/*",
-    "watch:test": "watch 'npm run test' app/ lib/ test/ --interval=1 --ignoreDotFiles",
+    "test:watch": "watch 'npm run test' app/ lib/ test/ --interval=1 --ignoreDotFiles",
     "app": "electron main.js",
     "build": "npm run build:mac && npm run build:win",
     "build:mac": "node build_scripts/build-mac.js",
