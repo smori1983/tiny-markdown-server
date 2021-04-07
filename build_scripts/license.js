@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const licenseChecker = require('license-checker');
 
+const packageJson = require('./../package.json');
+
 const outputFile = path.resolve(__dirname + '/../LICENSE.third_party.txt');
 const outputLines = [];
 
 const args = {
+  excludePackages: packageJson.name + '@' + packageJson.version,
   production: true,
   start: path.resolve(__dirname + '/..'),
 };
@@ -13,17 +16,13 @@ const args = {
 licenseChecker.init(args, (err, json) => {
   const packageAndVersions = Object.keys(json);
 
-  outputLines.push('tiny-markdown-server');
+  outputLines.push(packageJson.name);
   outputLines.push('');
   outputLines.push('THIRD-PARTY SOFTWARE LICENSES');
   outputLines.push('');
   outputLines.push('');
 
   packageAndVersions.forEach((packageAndVersion) => {
-    if (/^tiny-markdown-server/.test(packageAndVersion)) {
-      return;
-    }
-
     const licenseFile = json[packageAndVersion].licenseFile;
 
     outputLines.push(packageAndVersion + ' BEGIN HERE');
