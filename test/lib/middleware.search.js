@@ -28,7 +28,7 @@ describe('middleware.search', () => {
     /** @type {IndexItem[]} */
     const json = res.json.getCall(0).args[0];
 
-    assert.strictEqual(json.length, 0);
+    assert.strictEqual(json.length, 3);
   });
 
   it('should not response any result for empty query', () => {
@@ -43,7 +43,7 @@ describe('middleware.search', () => {
     /** @type {IndexItem[]} */
     const json = res.json.getCall(0).args[0];
 
-    assert.strictEqual(json.length, 0);
+    assert.strictEqual(json.length, 3);
   });
 
   given(
