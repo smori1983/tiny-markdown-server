@@ -16,10 +16,12 @@ describe('middleware.index', () => {
           }
       ]);
 
-    const req = {};
+    const req = {query: {}};
     const res = {render: sinon.spy()};
 
     SUT('/path/to/dir')(req, res);
+
+    scan.restore();
 
     assert.strictEqual(res.render.getCall(0).args[0], 'index.ejs');
     assert.deepStrictEqual(res.render.getCall(0).args[1], {
@@ -31,6 +33,5 @@ describe('middleware.index', () => {
       ]
     });
 
-    scan.restore();
   });
 });
