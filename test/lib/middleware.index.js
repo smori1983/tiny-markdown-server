@@ -27,7 +27,7 @@ describe('middleware.index', () => {
     assert.deepStrictEqual(res.render.getCall(0).args[1], {
       word: '',
       total: 1,
-      files: [
+      foundItems: [
         {
           path: '/file.md',
           notation: 'file.md',
