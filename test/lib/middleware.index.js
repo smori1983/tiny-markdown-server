@@ -26,6 +26,7 @@ describe('middleware.index', () => {
     assert.strictEqual(res.render.getCall(0).args[0], 'index.ejs');
     assert.deepStrictEqual(res.render.getCall(0).args[1], {
       word: '',
+      total: 1,
       files: [
         {
           path: '/file.md',
