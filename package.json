@@ -23,7 +23,6 @@
     "jquery": "^3.6.0",
     "jsonschema": "^1.4.0",
     "markdown-it": "^12.0.4",
-    "md5": "^2.3.0",
     "n-readlines": "^1.0.1",
     "popper.js": "^1.16.1",
     "sprintf-js": "^1.1.2",

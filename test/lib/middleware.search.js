@@ -25,10 +25,10 @@ describe('middleware.search', () => {
 
     SUT(dir)(req, res, next);
 
-    /** @type {IndexItem[]} */
+    /** @type {SearchResult} */
     const json = res.json.getCall(0).args[0];
 
-    assert.strictEqual(json.length, 0);
+    assert.strictEqual(json.foundItems.length, 3);
   });
 
   it('should not response any result for empty query', () => {
@@ -40,10 +40,10 @@ describe('middleware.search', () => {
 
     SUT(dir)(req, res, next);
 
-    /** @type {IndexItem[]} */
+    /** @type {SearchResult} */
     const json = res.json.getCall(0).args[0];
 
-    assert.strictEqual(json.length, 0);
+    assert.strictEqual(json.foundItems.length, 3);
   });
 
   given(
@@ -59,11 +59,11 @@ describe('middleware.search', () => {
 
     SUT(dir)(req, res, next);
 
-    /** @type {IndexItem[]} */
+    /** @type {SearchResult} */
     const json = res.json.getCall(0).args[0];
 
-    assert.strictEqual(json.length, 1);
-    assert.strictEqual(json[0].notation, 'file_01.md');
+    assert.strictEqual(json.foundItems.length, 1);
+    assert.strictEqual(json.foundItems[0].notation, 'file_01.md');
     assert.strictEqual(next.notCalled, true);
   });
 
@@ -79,11 +79,11 @@ describe('middleware.search', () => {
 
     SUT(dir)(req, res, next);
 
-    /** @type {IndexItem[]} */
+    /** @type {SearchResult} */
     const json = res.json.getCall(0).args[0];
 
-    assert.strictEqual(json.length, 1);
-    assert.strictEqual(json[0].notation, 'file_01.md');
+    assert.strictEqual(json.foundItems.length, 1);
+    assert.strictEqual(json.foundItems[0].notation, 'file_01.md');
     assert.strictEqual(next.notCalled, true);
   });
 });

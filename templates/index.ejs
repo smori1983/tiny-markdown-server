@@ -8,8 +8,8 @@
 <%- include('common/menu_index') %>
 <div class="main">
   <div class="container-md">
-    <% files.forEach(function(file) { %>
-    <div class="border-bottom tms-item" data-tms-item-md5="<%= file.notation_md5 %>">
+    <% foundItems.forEach(function(file) { %>
+    <div class="border-bottom tms-item">
       <div><a href="<%- file.path %>"><%= file.title %></a></div>
       <div class="small text-muted text-monospace"><%= file.notation %></div>
     </div>
@@ -17,6 +17,5 @@
   </div>
 </div>
 <script src="/-/jquery/jquery.min.js"></script>
-<script src="/-/index.js"></script>
 </body>
 </html>
