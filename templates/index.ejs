@@ -10,7 +10,7 @@
   <div class="container-md">
     <% foundItems.forEach(function(file) { %>
     <div class="border-bottom tms-item">
-      <div><a href="<%- file.path %>"><%= file.title %></a></div>
+      <div><a href="<%- file.path %>?word=<%= word %>"><%= file.title %></a></div>
       <div class="small text-muted text-monospace"><%= file.notation %></div>
     </div>
     <% }); %>
