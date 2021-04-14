@@ -2,6 +2,7 @@
 
 const browserSync = require('browser-sync');
 const sprintf = require('sprintf-js').sprintf;
+const open = require('open');
 const yargs = require('yargs');
 const mds = require('./lib/markdownServer');
 
@@ -24,18 +25,22 @@ yargs.command({
   },
   handler: (argv) => {
     mds.serve(argv.directory, argv.port, (server) => {
+      /** @type {module:net.AddressInfo} */
+      const addressInfo = server.address();
+      const url = sprintf('http://%s:%s', addressInfo.address, addressInfo.port);
+
       if (argv.autoDeploy === true) {
-        /** @type {module:net.AddressInfo} */
-        const addressInfo = server.address();
         const bs = browserSync.create();
         bs.init({
-          proxy: sprintf('http://%s:%s', addressInfo.address, addressInfo.port),
+          proxy: url,
           files: [
             'files_builtin',
             'lib',
             'templates',
           ],
         });
+      } else {
+        open(url);
       }
     });
   },
