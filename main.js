@@ -5,6 +5,8 @@ const ejsElectron = require('ejs-electron');
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
+const shell = electron.shell;
+const sprintf = require('sprintf-js').sprintf;
 
 const app = electron.app;
 
@@ -44,7 +46,13 @@ ipcMain.on('server-start', (event, args) => {
     server.close();
   }
 
-  server = mds.serve(args.directory, args.port);
+  server = mds.serve(args.directory, args.port, (srv) => {
+    /** @type {module:net.AddressInfo} */
+    const addressInfo = srv.address();
+    const url = sprintf('http://%s:%s', addressInfo.address, addressInfo.port);
+
+    shell.openExternal(url);
+  });
 
   event.sender.send('server-started');
 });
