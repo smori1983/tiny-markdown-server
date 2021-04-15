@@ -1,5 +1,3 @@
-'use strict';
-
 const ejsElectron = require('ejs-electron');
 
 const electron = require('electron');
