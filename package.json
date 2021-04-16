@@ -24,7 +24,7 @@
     "jsonschema": "^1.4.0",
     "markdown-it": "^12.0.4",
     "n-readlines": "^1.0.1",
-    "open": "^8.0.5",
+    "open": "^8.0.6",
     "popper.js": "^1.16.1",
     "sprintf-js": "^1.1.2",
     "yargs": "^16.2.0"
