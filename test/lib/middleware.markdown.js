@@ -29,7 +29,7 @@ describe('middleware.markdown', () => {
   it('should handle .md file', () => {
     const dir = __dirname + '/../../test_resource/dir_04';
 
-    const req = {method: 'GET', path: '/dir_04_01/file_04.md'};
+    const req = {method: 'GET', path: '/dir_04_01/file_04.md', query: {}};
     const res = {render: sinon.spy()};
     const next = sinon.spy();
 
@@ -42,7 +42,7 @@ describe('middleware.markdown', () => {
   it('should handle .markdown file', () => {
     const dir = __dirname + '/../../test_resource/dir_04';
 
-    const req = {method: 'GET', path: '/dir_04_01/file_05.markdown'};
+    const req = {method: 'GET', path: '/dir_04_01/file_05.markdown', query: {}};
     const res = {render: sinon.spy()};
     const next = sinon.spy();
 
@@ -55,7 +55,7 @@ describe('middleware.markdown', () => {
   it('should handle file includes # in path', () => {
     const dir = __dirname + '/../../test_resource/dir_05';
 
-    const req = {method: 'GET', path: '/dir_05%2301/file%2302.md'};
+    const req = {method: 'GET', path: '/dir_05%2301/file%2302.md', query: {}};
     const res = {render: sinon.spy()};
     const next = sinon.spy();
 
@@ -68,7 +68,7 @@ describe('middleware.markdown', () => {
   it('should handle file includes + in path', () => {
     const dir = __dirname + '/../../test_resource/dir_06';
 
-    const req = {method: 'GET', path: '/dir_06%2B01/file%2B02.md'};
+    const req = {method: 'GET', path: '/dir_06%2B01/file%2B02.md', query: {}};
     const res = {render: sinon.spy()};
     const next = sinon.spy();
 
@@ -81,7 +81,7 @@ describe('middleware.markdown', () => {
   it('should handle file includes ? in path', () => {
     const dir = __dirname + '/../../test_resource/dir_07';
 
-    const req = {method: 'GET', path: '/dir_07%3F01/file%3F02.md'};
+    const req = {method: 'GET', path: '/dir_07%3F01/file%3F02.md', query: {}};
     const res = {render: sinon.spy()};
     const next = sinon.spy();
 
