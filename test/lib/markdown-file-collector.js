@@ -1,14 +1,14 @@
 const { describe, it } = require('mocha');
 const assert = require('assert');
-const SUT = require('../../lib/indexUtil');
+const MarkdownFileCollector = require('../../lib/markdown-file-collector');
 
-describe('lib.indexUtil', () => {
-  describe('scanMarkdownFiles', () => {
+describe('lib.MarkdownFileCollector', () => {
+  describe('collect', () => {
     describe('ignored directories', () => {
       it('should ignore DOT directory', () => {
         const dir = __dirname + '/../../test_resource/ignore_01';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 2);
         assert.strictEqual(result[0].title, 'file_02');
@@ -20,7 +20,7 @@ describe('lib.indexUtil', () => {
       it('.md - 1 file found', () => {
         const dir = __dirname + '/../../test_resource/dir_01';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 1);
         assert.strictEqual(result[0].path, '/file_01.md');
@@ -30,7 +30,7 @@ describe('lib.indexUtil', () => {
       it('.md - 2 files found', () => {
         const dir = __dirname + '/../../test_resource/dir_02';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 2);
         assert.strictEqual(result[0].path, '/file_01.md');
@@ -42,7 +42,7 @@ describe('lib.indexUtil', () => {
       it('.markdown - 1 file found', () => {
         const dir = __dirname + '/../../test_resource/dir_03';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 1);
         assert.strictEqual(result[0].path, '/file_02.markdown');
@@ -52,7 +52,7 @@ describe('lib.indexUtil', () => {
       it('has directory - 4 files found', () => {
         const dir = __dirname + '/../../test_resource/dir_04';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 4);
         assert.strictEqual(result[0].path, '/dir_04_01/file_04.md');
@@ -70,7 +70,7 @@ describe('lib.indexUtil', () => {
       it('# should be encoded to %23', () => {
         const dir = __dirname + '/../../test_resource/dir_05';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 2);
         assert.strictEqual(result[0].path, '/dir_05%2301/file%2302.md');
@@ -82,7 +82,7 @@ describe('lib.indexUtil', () => {
       it('+ should be encoded to %2B', () => {
         const dir = __dirname + '/../../test_resource/dir_06';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 2);
         assert.strictEqual(result[0].path, '/dir_06%2B01/file%2B02.md');
@@ -94,7 +94,7 @@ describe('lib.indexUtil', () => {
       it('? should be encoded to %3F', () => {
         const dir = __dirname + '/../../test_resource/dir_07';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result.length, 2);
         assert.strictEqual(result[0].path, '/dir_07%3F01/file%3F02.md');
@@ -108,7 +108,7 @@ describe('lib.indexUtil', () => {
       it('should find #', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[0].title, 'file_01');
       });
@@ -116,7 +116,7 @@ describe('lib.indexUtil', () => {
       it('should find ##', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[1].title, 'file_02');
       });
@@ -124,7 +124,7 @@ describe('lib.indexUtil', () => {
       it('should find ###', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[2].title, 'file_03');
       });
@@ -132,7 +132,7 @@ describe('lib.indexUtil', () => {
       it('should find ######', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[3].title, 'file_04');
       });
@@ -140,7 +140,7 @@ describe('lib.indexUtil', () => {
       it('should not find any header line - no header lines', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[4].title, 'file_05.md');
       });
@@ -148,7 +148,7 @@ describe('lib.indexUtil', () => {
       it('should not find any header line - no space after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[5].title, 'file_06.md');
       });
@@ -156,7 +156,7 @@ describe('lib.indexUtil', () => {
       it('should find # - 3 spaces after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[6].title, 'file_07');
       });
@@ -164,7 +164,7 @@ describe('lib.indexUtil', () => {
       it('should not find any header line - 4 spaces after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
-        const result = SUT.scanMarkdownFiles(dir);
+        const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[7].title, 'file_08.md');
       });
