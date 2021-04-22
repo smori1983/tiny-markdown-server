@@ -38,7 +38,7 @@ app.on('ready', () => {
 });
 
 ipcMain.on('server-start', (event, args) => {
-  const mds = require('./lib/markdownServer');
+  const mds = require('./lib/markdown-server');
 
   if (server) {
     server.close();

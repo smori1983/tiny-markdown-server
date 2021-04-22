@@ -4,7 +4,7 @@ const browserSync = require('browser-sync');
 const sprintf = require('sprintf-js').sprintf;
 const open = require('open');
 const yargs = require('yargs');
-const mds = require('./lib/markdownServer');
+const mds = require('./lib/markdown-server');
 
 yargs.command({
   command: ['serve <directory> <port>', '$0'],
