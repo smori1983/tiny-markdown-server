@@ -1,5 +1,3 @@
-'use strict';
-
 const browserSync = require('browser-sync');
 const sprintf = require('sprintf-js').sprintf;
 const open = require('open');
