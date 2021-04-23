@@ -168,6 +168,22 @@ describe('lib.MarkdownFileCollector', () => {
 
         assert.strictEqual(result[7].title, 'file_08.md');
       });
+
+      it('should return file name as title when text found but heading line not found within first 3 lines', () => {
+        const dir = __dirname + '/../../test_resource/dir_09';
+
+        const result = new MarkdownFileCollector().collect(dir);
+
+        assert.strictEqual(result[0].title, 'file_01.md');
+      });
+
+      it('should return file name as title when heading line not found within first 3 lines', () => {
+        const dir = __dirname + '/../../test_resource/dir_09';
+
+        const result = new MarkdownFileCollector().collect(dir);
+
+        assert.strictEqual(result[1].title, 'file_02.md');
+      });
     });
   });
 });
