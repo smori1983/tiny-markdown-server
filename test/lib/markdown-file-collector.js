@@ -145,12 +145,12 @@ describe('lib.MarkdownFileCollector', () => {
         assert.strictEqual(result[4].title, 'file_05.md');
       });
 
-      it('should not find any header line - no space after hash character', () => {
+      it('should permit being no space after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = new MarkdownFileCollector().collect(dir);
 
-        assert.strictEqual(result[5].title, 'file_06.md');
+        assert.strictEqual(result[5].title, 'Title of file_06');
       });
 
       it('should find # - 3 spaces after hash character', () => {
