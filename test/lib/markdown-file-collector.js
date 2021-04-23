@@ -145,12 +145,12 @@ describe('lib.MarkdownFileCollector', () => {
         assert.strictEqual(result[4].title, 'file_05.md');
       });
 
-      it('should not find any header line - no space after hash character', () => {
+      it('should permit being no space after hash character', () => {
         const dir = __dirname + '/../../test_resource/dir_08';
 
         const result = new MarkdownFileCollector().collect(dir);
 
-        assert.strictEqual(result[5].title, 'file_06.md');
+        assert.strictEqual(result[5].title, 'Title of file_06');
       });
 
       it('should find # - 3 spaces after hash character', () => {
@@ -167,6 +167,22 @@ describe('lib.MarkdownFileCollector', () => {
         const result = new MarkdownFileCollector().collect(dir);
 
         assert.strictEqual(result[7].title, 'file_08.md');
+      });
+
+      it('should return file name as title when text found but heading line not found within first 3 lines', () => {
+        const dir = __dirname + '/../../test_resource/dir_09';
+
+        const result = new MarkdownFileCollector().collect(dir);
+
+        assert.strictEqual(result[0].title, 'file_01.md');
+      });
+
+      it('should return file name as title when heading line not found within first 3 lines', () => {
+        const dir = __dirname + '/../../test_resource/dir_09';
+
+        const result = new MarkdownFileCollector().collect(dir);
+
+        assert.strictEqual(result[1].title, 'file_02.md');
       });
     });
   });
