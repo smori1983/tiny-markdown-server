@@ -27,7 +27,7 @@
     "open": "^8.0.7",
     "popper.js": "^1.16.1",
     "sprintf-js": "^1.1.2",
-    "yargs": "^16.2.0"
+    "yargs": "^17.0.1"
   },
   "devDependencies": {
     "@types/buffers": "^0.1.31",
