@@ -37,7 +37,7 @@
     "browser-sync": "^2.26.14",
     "electron": "^9.4.4",
     "electron-builder": "22.9.*",
-    "eslint": "^7.25.0",
+    "eslint": "^7.26.0",
     "istanbul": "^0.4.5",
     "license-checker": "^25.0.1",
     "mocha": "^8.4.0",
