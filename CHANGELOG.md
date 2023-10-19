@@ -1,34 +1,37 @@
 # CHANGELOG
 
+
 ## Next (v2.0.0)
 
-### Feature
+### Features
 
-- Fulltext search form in top page (#6)
+- Fulltext search form on top page ([#6](https://github.com/smori1983/tiny-markdown-server/issues/6))
+
 
 ## v1.1.0
 
-### Feature
+### Features
 
-- Increase supported file extensions to `.md` and `.markdown`
+- Support `.markdown` files ([#2](https://github.com/smori1983/tiny-markdown-server/pull/2))
 
 ### Development
 
-- Travis CI
-- `mocha`
-- `--auto-deploy` option in `cli.js`
+- `--auto-deploy` option in `cli.js` ([#8](https://github.com/smori1983/tiny-markdown-server/pull/8))
+
 
 ## v1.0.2
 
-### Bug fix
+### Bug Fixes
 
 - Escape all `+`, `#` and `?` when creating links in top page.
 
+
 ## v1.0.1
 
-### Bug fix
+### Bug Fixes
 
 - Escape `+`, `#` and `?` when creating links in top page.
+
 
 ## v1.0.0
 
