@@ -58,7 +58,7 @@ ipcMain.on('server-start', (event, args) => {
   server = mds.serve(args.directory, args.port, (srv) => {
     /** @type {module:net.AddressInfo} */
     const addressInfo = srv.address();
-    const url = sprintf('http://%s:%s', addressInfo.address, addressInfo.port);
+    const url = sprintf('http://localhost:%s', addressInfo.port);
 
     shell.openExternal(url);
   });

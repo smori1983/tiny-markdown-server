@@ -25,7 +25,7 @@ yargs.command({
     mds.serve(argv.directory, argv.port, (server) => {
       /** @type {module:net.AddressInfo} */
       const addressInfo = server.address();
-      const url = sprintf('http://%s:%s', addressInfo.address, addressInfo.port);
+      const url = sprintf('http://localhost:%s', addressInfo.port);
 
       if (argv.autoDeploy === true) {
         const bs = browserSync.create();
