@@ -1,29 +1,19 @@
-const {ipcRenderer} = require('electron');
-const {dialog} = require('electron').remote;
-
-const Message = require('./message');
-const Validation = require('./validation');
-
 document.addEventListener('DOMContentLoaded', () => {
   const serverStatus = new Message('server-status');
 
   document.getElementById('directory_select').addEventListener('click', () => {
-    dialog.showOpenDialog({
-      properties: ['openDirectory'],
-    }).then((result) => {
-      document.getElementById('directory').value = result.filePaths[0];
+    window.myAPI.dialog((filePath) => {
+      if (typeof filePath === 'string') {
+        document.getElementById('directory').value = filePath;
+      }
     });
   });
 
   document.getElementById('start').addEventListener('click', () => {
-    const validation = new Validation();
     const directory = document.getElementById('directory').value;
     const port = document.getElementById('port').value;
 
-    const result = validation.execute({
-      directory: directory,
-      port: port,
-    });
+    const validationResult = myAPI.validateForm(directory, port);
 
     serverStatus.hide();
 
@@ -31,27 +21,55 @@ document.addEventListener('DOMContentLoaded', () => {
       element.classList.remove('is-invalid');
     });
 
-    if (result.isValid) {
-      ipcRenderer.send('server-start', {
-        directory: directory,
-        port: port,
-      });
+    if (validationResult.isValid) {
+      window.myAPI.serverStart(directory, port);
     } else {
-      result.errors.forEach((id) => {
+      validationResult.errors.forEach((id) => {
         document.getElementById(id).classList.add('is-invalid');
       });
     }
   });
 
   document.getElementById('stop').addEventListener('click', () => {
-    ipcRenderer.send('server-stop');
+    window.myAPI.serverStop();
   });
 
-  ipcRenderer.on('server-started', () => {
+  window.myAPI.serverStarted(() => {
     serverStatus.show('server started.');
   });
 
-  ipcRenderer.on('server-stopped', () => {
+  window.myAPI.serverStopped(() => {
     serverStatus.show('server stopped.');
   });
 });
+
+class Message {
+  /**
+   * @param {string} elementId
+   */
+  constructor(elementId) {
+    this._elementId = elementId;
+
+    this._timeoutId = null;
+  }
+
+  /**
+   * @param {string} value
+   */
+  show (value) {
+    document.getElementById(this._elementId).innerHTML = value;
+
+    if (this._timeoutId !== null) {
+      window.clearTimeout(this._timeoutId);
+    }
+
+    this._timeoutId = window.setTimeout(() => {
+      this._timeoutId = null;
+      this.hide();
+    }, 3000);
+  }
+
+  hide() {
+    document.getElementById(this._elementId).innerHTML = '';
+  }
+}
