@@ -7,6 +7,10 @@
 
 - Fulltext search form on top page ([#6](https://github.com/smori1983/tiny-markdown-server/issues/6))
 
+### Development
+
+- Update for Electron v27 ([#64](https://github.com/smori1983/tiny-markdown-server/pull/64))
+
 
 ## v1.1.0
 
