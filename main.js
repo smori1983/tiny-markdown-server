@@ -1,7 +1,9 @@
+const path = require('path');
 const ejsElectron = require('ejs-electron');
 
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
+const dialog = electron.dialog;
 const ipcMain = electron.ipcMain;
 const shell = electron.shell;
 const sprintf = require('sprintf-js').sprintf;
@@ -25,7 +27,8 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
     },
     width: 800,
     height: 600,
@@ -35,6 +38,14 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+});
+
+ipcMain.handle('directory-select', async () => {
+  const result = await dialog.showOpenDialog({
+    properties: ['openDirectory'],
+  });
+
+  return result.canceled ? null : result.filePaths[0];
 });
 
 ipcMain.on('server-start', (event, args) => {
