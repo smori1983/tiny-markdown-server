@@ -34,7 +34,7 @@
     "@types/json-schema": "^7.0.14",
     "@types/yargs": "^17.0.29",
     "browser-sync": "^2.29.3",
-    "electron": "^27.0.1",
+    "electron": "^27.0.2",
     "electron-builder": "24.6.*",
     "eslint": "^8.52.0",
     "istanbul": "^0.4.5",
