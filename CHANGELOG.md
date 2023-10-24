@@ -5,6 +5,7 @@
 
 ### Features
 
+- Open in browser when server started ([#32](https://github.com/smori1983/tiny-markdown-server/issues/32))
 - Fulltext search form on top page ([#6](https://github.com/smori1983/tiny-markdown-server/issues/6))
 
 ### Development
