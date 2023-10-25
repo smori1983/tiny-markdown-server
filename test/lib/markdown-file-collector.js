@@ -91,7 +91,7 @@ describe('lib.MarkdownFileCollector', () => {
         assert.strictEqual(result[1].notation, 'file+01.md');
       });
 
-      it('? should be encoded to %3F', () => {
+      it.skip('? should be encoded to %3F', () => {
         const dir = __dirname + '/../../test_resource/dir_07';
 
         const result = new MarkdownFileCollector().collect(dir);

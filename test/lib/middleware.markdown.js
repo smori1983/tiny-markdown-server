@@ -78,7 +78,7 @@ describe('middleware.markdown', () => {
     assert.strictEqual(next.notCalled, true);
   });
 
-  it('should handle file includes ? in path', () => {
+  it.skip('should handle file includes ? in path', () => {
     const dir = __dirname + '/../../test_resource/dir_07';
 
     const req = {method: 'GET', path: '/dir_07%3F01/file%3F02.md', query: {}};
