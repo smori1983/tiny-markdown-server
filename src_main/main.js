@@ -1,5 +1,4 @@
 const path = require('path');
-const ejsElectron = require('ejs-electron');
 
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
@@ -20,10 +19,6 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  const packageJson = require(__dirname + '/package.json');
-
-  ejsElectron.data('version', packageJson.version);
-
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
