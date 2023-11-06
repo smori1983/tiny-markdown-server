@@ -7,6 +7,7 @@
     "license:generate": "node build_scripts/license.js",
     "test": "mocha test/*",
     "test:coverage": "istanbul cover --print both _mocha -- test/*",
+    "webpack:renderer": "webpack --config webpack.config.js",
     "app": "electron --trace-warnings main.js",
     "build": "npm run build:mac && npm run build:win",
     "build:mac": "node build_scripts/build-mac.js",
