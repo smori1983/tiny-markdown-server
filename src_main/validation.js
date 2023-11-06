@@ -1,5 +1,5 @@
 const fs = require('fs');
-const ValidationBuilder = require('./validationBuilder');
+const ValidationBuilder = require('./validation-builder');
 
 /**
  * @param {string} input

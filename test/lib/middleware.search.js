@@ -2,7 +2,7 @@ const { describe, it } = require('mocha');
 const { given } = require('mocha-testdata');
 const assert = require('assert');
 const sinon = require('sinon');
-const SUT = require('../../lib/middleware.search');
+const SUT = require('../../src_main/lib/middleware.search');
 
 describe('middleware.search', () => {
   it('should do nothing if request is not GET', () => {

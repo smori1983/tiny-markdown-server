@@ -1,5 +1,4 @@
 const path = require('path');
-const ejsElectron = require('ejs-electron');
 
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
@@ -20,10 +19,6 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  const packageJson = require(__dirname + '/package.json');
-
-  ejsElectron.data('version', packageJson.version);
-
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
@@ -33,7 +28,8 @@ app.on('ready', () => {
     width: 800,
     height: 600,
   });
-  mainWindow.loadURL('file://' + __dirname + '/app/index.ejs').then();
+  mainWindow.loadURL('file://' + path.resolve(__dirname, '..', 'build_renderer/index.html')).then();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null;

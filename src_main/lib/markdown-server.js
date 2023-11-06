@@ -18,14 +18,14 @@ const markdown = require('./middleware.markdown');
 const createApplication = (userFileDir) => {
   const app = express();
 
-  app.set('views', fs.realpathSync(__dirname + '/../templates'));
+  app.set('views', fs.realpathSync(__dirname + '/templates'));
   app.set('view engine', 'ejs');
 
   app.get('/', index(userFileDir));
 
   app.use(markdown(userFileDir));
 
-  app.use('/-/', express.static(fs.realpathSync(__dirname + '/../files_builtin'), {
+  app.use('/-/', express.static(fs.realpathSync(__dirname + '/files_builtin'), {
     fallthrough: false,
   }));
 

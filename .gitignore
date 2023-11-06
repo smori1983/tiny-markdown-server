@@ -1,5 +1,6 @@
 /.idea
 /.DS_Store
 /_dist
+/build_renderer
 /coverage
 /node_modules

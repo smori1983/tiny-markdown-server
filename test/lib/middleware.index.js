@@ -1,7 +1,7 @@
 const { describe, it } = require('mocha');
 const assert = require('assert');
 const sinon = require('sinon');
-const SUT = require('../../lib/middleware.index');
+const SUT = require('../../src_main/lib/middleware.index');
 
 describe('middleware.index', () => {
   it('should render using indexUtil', () => {
