@@ -33,7 +33,7 @@ app.on('ready', () => {
     width: 800,
     height: 600,
   });
-  mainWindow.loadURL('file://' + __dirname + '/app/index.ejs').then();
+  mainWindow.loadURL('file://' + __dirname + '/build_renderer/index.html').then();
 
   mainWindow.on('closed', () => {
     mainWindow = null;
