@@ -6,6 +6,7 @@
           class="navbar-brand mb-0 h1"
           href="#"
         >Tiny Markdown Server</a>
+        <span>{{ version }}</span>
       </div>
     </nav>
 
@@ -56,6 +57,8 @@
 export default {
   data() {
     return {
+      version: '',
+
       directory: '',
       port: '',
 
@@ -67,6 +70,8 @@ export default {
   },
 
   mounted() {
+    this.version = window.myAPI.packageVersion();
+
     window.myAPI.serverStarted(() => {
       this.showStatus('server started.');
     });

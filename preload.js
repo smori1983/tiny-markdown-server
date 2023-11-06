@@ -3,9 +3,13 @@ const {
   ipcRenderer,
 } = require('electron');
 
+const packageJson = require(__dirname + '/package.json');
 const Validation = require('./app/validation');
 
 contextBridge.exposeInMainWorld('myAPI', {
+  packageVersion: () => {
+    return packageJson.version;
+  },
   serverStart: (directory, port) => {
     ipcRenderer.send('server-start', {
       directory,
