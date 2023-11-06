@@ -33,7 +33,8 @@ app.on('ready', () => {
     width: 800,
     height: 600,
   });
-  mainWindow.loadURL('file://' + __dirname + '/build_renderer/index.html').then();
+  mainWindow.loadURL('file://' + path.resolve(__dirname, '..', 'build_renderer/index.html')).then();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -49,7 +50,7 @@ ipcMain.handle('directory-select', async () => {
 });
 
 ipcMain.on('server-start', (event, args) => {
-  const mds = require('./lib/markdown-server');
+  const mds = require('../lib/markdown-server');
 
   if (server) {
     server.close();

@@ -1,10 +1,11 @@
+const path = require('path');
 const {
   contextBridge,
   ipcRenderer,
 } = require('electron');
 
-const packageJson = require(__dirname + '/package.json');
-const Validation = require('./app/validation');
+const packageJson = require(path.resolve(__dirname, '..', 'package.json'));
+const Validation = require('./validation');
 
 contextBridge.exposeInMainWorld('myAPI', {
   packageVersion: () => {
