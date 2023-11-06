@@ -11,6 +11,7 @@
 ### Development
 
 - Update for Electron v27 ([#64](https://github.com/smori1983/tiny-markdown-server/pull/64))
+- Reimplement renderer process with Vue ([#67](https://github.com/smori1983/tiny-markdown-server/pull/67))
 
 
 ## v1.1.0
