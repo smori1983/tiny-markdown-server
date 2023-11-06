@@ -45,7 +45,7 @@ ipcMain.handle('directory-select', async () => {
 });
 
 ipcMain.on('server-start', (event, args) => {
-  const mds = require('../lib/markdown-server');
+  const mds = require('./lib/markdown-server');
 
   if (server) {
     server.close();

@@ -1,6 +1,6 @@
 const { describe, it } = require('mocha');
 const assert = require('assert');
-const MarkdownFileCollector = require('../../lib/markdown-file-collector');
+const MarkdownFileCollector = require('../../src_main/lib/markdown-file-collector');
 
 describe('lib.MarkdownFileCollector', () => {
   describe('collect', () => {
