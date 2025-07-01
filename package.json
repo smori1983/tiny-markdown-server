@@ -36,7 +36,7 @@
     "browser-sync": "^3.0.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
-    "electron": "^27.0.2",
+    "electron": "^28.3.2",
     "electron-builder": "24.13.*",
     "eslint": "^8.56.0",
     "istanbul": "^0.4.5",
